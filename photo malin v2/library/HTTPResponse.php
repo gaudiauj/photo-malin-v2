@@ -15,7 +15,6 @@ namespace Library;
  */
 class HTTPResponse {
 
-    //put your code here
     protected $page;
 
     public function addHeader($header) {
