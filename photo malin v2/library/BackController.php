@@ -59,6 +59,7 @@ class BackController extends ApplicationComponent {
         }
 
         $this->view = $view;
+        $this->page->setContentFile(__DIR__.'/../Applications/'.$this->app->name().'/Modules/'.$this->module.'/Views/'.$this->view.'.php');
     }
 
 }
