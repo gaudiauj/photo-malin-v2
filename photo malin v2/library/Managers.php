@@ -23,8 +23,8 @@ class Managers {
             throw new \InvalidArgumentException('Le module spécifié est invalide');
         }
         if (!isset($this->managers[$module])) {
-            $manager = '\\Library\\Models\\' . $module . 'Manager_' . $this->api;
-            $this->managers[$module] = new $manager($this->dao);
+            $managerinst = '\\Library\\Models\\' . $module . 'Manager_' . $this->api;
+            $this->managers[$module] = new $managerinst($this->dao);
         }
 
         return $this->managers[$module];

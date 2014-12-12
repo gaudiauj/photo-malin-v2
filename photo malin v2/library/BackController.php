@@ -27,7 +27,7 @@ class BackController extends ApplicationComponent {
 
     public function execute() {
         $methode = 'execute' . ucfirst($this->action);
-        if (!is_callable(array($this, $method))) {
+        if (!is_callable(array($this, $methode))) {
             throw new \RuntimeException('L\'action' . $this->action . 'n\existe pas');
         }
         $this->$methode($this->app->httpRequest());
