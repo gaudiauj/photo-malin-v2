@@ -16,7 +16,7 @@ namespace Library;
 class PDOFactory {
     public static function getMysqlConnexionPDO()
   {
-    $db = new \PDO('mysql:host=localhost;dbname=news', 'root', '');
+    $db = new \PDO('mysql:host=localhost;dbname=testjean', 'root', '');
     $db->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
     
     return $db;

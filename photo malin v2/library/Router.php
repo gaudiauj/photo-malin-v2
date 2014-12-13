@@ -34,7 +34,7 @@ class Router {
            $varsValues = $route->match($url);
            if ($varsValues !== false)
            {
-               if ($route->hasVars)
+               if ($route->hasVars())
                {
                     $varsnames = $route->varsName();
                     $listVars = array();
@@ -44,11 +44,11 @@ class Router {
                         if ($key !==0)
                         {
                             $listVars[$varsnames[$key - 1]]= $match;
-                        }
-                        $route->setVars($listVars);
+                        }                        
                     }
-                    return $route;
+                    $route->setVars($listVars);
                }
+            return $route;
            }
        }
        

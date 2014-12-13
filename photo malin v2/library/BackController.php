@@ -21,7 +21,7 @@ class BackController extends ApplicationComponent {
         $this->setModule($module);
         $this->setAction($action);
         $this->setView($action);
-        $this->managers = new Managers('PDO', PDOFactory::getMysqlConnexion());
+        $this->managers = new Managers('PDO', PDOFactory::getMysqlConnexionPDO());
     }
     
 
