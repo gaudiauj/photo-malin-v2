@@ -36,7 +36,7 @@ class Router {
            {
                if ($route->hasVars())
                {
-                    $varsnames = $route->varsName();
+                    $varsnames = $route->varsNames();
                     $listVars = array();
                     foreach ($varsValues as $key => $match)
                     {

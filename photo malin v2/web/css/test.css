@@ -11,6 +11,10 @@ position: relative;
 top: 0px;
 right: 8px;
 }
+.jumbotron .auteur
+{
+    font-size: 10px;
+}
 .chat
 {
 color: black;

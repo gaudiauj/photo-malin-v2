@@ -8,4 +8,6 @@ and open the template in the editor.
 
 <routes>
 <route url="/jeantest/web/" module="News" action="index" /> 
+<route url="/jeantest/web/news" module="News" action="news" /> 
+<route url="/jeantest/web/news-([0-9]+)" module="News" action="show" vars="id"/>
 </routes>
