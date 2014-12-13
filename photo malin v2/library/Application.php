@@ -19,12 +19,14 @@ abstract class Application {
     protected $httpResponse;
     protected $name;
     protected $user;
+    protected $config;
 
     public function __construct() {
-        $this->httpRequest = new HTTPRequest;
-        $this->httpResponse = new HTTPResponse;
+        $this->httpRequest = new HTTPRequest($this);
+        $this->httpResponse = new HTTPResponse($this);
         $this->name = '';
-        $this->user= new user;
+        $this->user= new user($this);
+        $this->config = new Config($this);
     }
 
     abstract public function run();
@@ -40,28 +42,32 @@ abstract class Application {
     public function name() {
         return $this->name;
     }
+    
+     public function config() {
+        return $this->config;
+    }
+    
+     public function user() {
+        return $this->user;
+    }
 
     public function getController() {
         $router = new \Library\Router;
 
         $xml = new \DOMDocument;
-        $xml->load(__DIR__ . '/../Applications/' . $this->name . '/Config/routes.xml');
+        $xml->load(__DIR__ . '/../Applications/' . $this->name . '/Config/route.xml');
 
         $routes = $xml->getElementsByTagName('route');
-
         // On parcourt les routes du fichier XML.
         foreach ($routes as $route) {
             $vars = array();
-
             // On regarde si des variables sont présentes dans l'URL.
             if ($route->hasAttribute('vars')) {
                 $vars = explode(',', $route->getAttribute('vars'));
             }
-
             // On ajoute la route au routeur.
             $router->addRoute(new Route($route->getAttribute('url'), $route->getAttribute('module'), $route->getAttribute('action'), $vars));
         }
-
         try {
             // On récupère la route correspondante à l'URL.
             $matchedRoute = $router->getRoute($this->httpRequest->requestURI());

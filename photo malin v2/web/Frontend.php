@@ -6,7 +6,7 @@
  * and open the template in the editor.
  */
 
-require '../Library/autoload.php';
+require '../library/autoload.php';
 
 $app = new Applications\Frontend\FrontendApplication;
 $app->run();
