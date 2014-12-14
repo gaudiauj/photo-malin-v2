@@ -51,6 +51,7 @@ class NewsController extends \Library\BackController {
 
         $this->page->addVars('title', $news->titre());
         $this->page->addVars('news', $news);
+        $this->page->addVars('comments', $this->managers->getManagerOf('Comments')->getListOf($news->id()));
     }
 
     public function executeIndex(\Library\HTTPRequest $request) {
@@ -63,5 +64,36 @@ class NewsController extends \Library\BackController {
         $this->page->addVars('title', $news->titre());
         $this->page->addVars('news', $news);
     }
+    
+    public function executeInsertComment(\Library\HTTPRequest $request)
+  {
+    $this->page->addVars('title', 'Ajout d\'un commentaire');
+    
+    if ($request->postExists('pseudo'))
+    {
+      $comment = new \Library\Entities\Comment(array(
+        'news' => $request->getData('news'),
+        'auteur' => $request->postData('pseudo'),
+        'contenu' => $request->postData('contenu')
+      ));
+      
+      if ($comment->isValid())
+      {
+        $this->managers->getManagerOf('Comments')->save($comment);
+        
+        $this->app->user()->setFlash('Le commentaire a bien été ajouté, merci !');
+        
+        $this->app->httpResponse()->redirect('news-'.$request->getData('news'));
+      }
+      else
+      {
+        $this->page->addVars('erreurs', $comment->erreurs());
+      }
+      
+      $this->page->addVars('comment', $comment);
+    }
+  }
+  
+  
 
 }

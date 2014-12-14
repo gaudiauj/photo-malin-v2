@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
 	<meta name="keywords" content="photo, malin, polkach, droit d'auteur, vendre photo, acheter photo,photo malin" />
 	<meta name="description" content="photo malin vous permettra d'avoirs accés à un grand nombre de photos de grande qualité pour usage commercial à un prix imbatable et peut être trouver la perle rare, mais aussi de proposer vos photos a la vente afin de pourquoi pas taper dans l'oeil d'un grand magazine. Et oui gagner de l'argent avec vos photo c'est possible" />
-    <title> title</title>
+    <title> <?php echo($title);?></title>
 	<link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.css" />
 	<link rel="shortcut icon" type="image/x-icon" href="/img/favicon.ico" />
     <!-- Bootstrap -->

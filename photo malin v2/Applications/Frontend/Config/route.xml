@@ -7,6 +7,7 @@ and open the template in the editor.
 
 
 <routes>
+<route url="/jeantest/web/commenter-([0-9]+)" module="News" action="insertComment" vars="news" />
 <route url="/jeantest/web/index.php\?page=accueil" module="News" action="index" /> 
 <route url="/jeantest/web/index.php" module="News" action="index" /> 
 <route url="/jeantest/web/" module="News" action="index" /> 
