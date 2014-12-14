@@ -67,7 +67,7 @@ abstract class Application {
             }
             // On ajoute la route au routeur.
             $router->addRoute(new Route($route->getAttribute('url'), $route->getAttribute('module'), $route->getAttribute('action'), $vars));
-        }        
+        }     
         try {
             // On récupère la route correspondante à l'URL.
             $matchedRoute = $router->getRoute($this->httpRequest->requestURI());
