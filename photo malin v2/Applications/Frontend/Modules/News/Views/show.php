@@ -49,7 +49,7 @@
                     <legend>
                         Posté par <strong><?php echo htmlspecialchars($comment['auteur']); ?></strong> le <?php echo $comment['date']->format('d/m/Y à H\hi'); ?>
                     </legend>
-                    <p><?php echo nl2br(htmlspecialchars($comment['contenu'])); ?></p>
+                    <p><?php echo (nl2br(htmlspecialchars($comment['contenu']))); ?></p>
                 </fieldset>
     <?php
 }

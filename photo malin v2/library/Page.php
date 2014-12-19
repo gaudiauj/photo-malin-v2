@@ -30,6 +30,7 @@ class Page extends ApplicationComponent {
         if (!file_exists($this->contentFile)) {
             throw new \RuntimeException('La vue spécifiée n\'existe pas');
         }
+        header( 'content-type: text/html; charset=utf-8' );
         $user = $this->app->user();
 
         extract($this->vars);

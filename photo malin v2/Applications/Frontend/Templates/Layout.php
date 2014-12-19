@@ -13,7 +13,7 @@
         <link href="css/bootstrap.css" rel="stylesheet">
         <link href="css/test.css" rel="stylesheet">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-        <script src="scripts/connexion_nav.js"></script>
+        <script src="scripts/bootstrap.min.js"></script>
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
         <!--[if lt IE 9]>
@@ -52,25 +52,25 @@
                             </ul>
                           </li>-->	
                         <li><a href="mailto:gaudiauj@gmail.com">Me contacter</a></li>
-                   
-                    <?php
-                    if ($this->app->user()->isAuthenticated()) {
-                        ?>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Admin <span class="caret"></span></a>
-                            <ul class="dropdown-menu" role="menu">
-                                <li><a href="http://localhost/jeantest/web/admin/news">News</a></li>
-                                 <li><a href="http://localhost/jeantest/web//admin/news-insert">insert news</a></li>
-                                <li><a href="#">Something else here</a></li>
-                                <li class="divider"></li>
-                                <li><a href="#">Separated link</a></li>
-                                <li class="divider"></li>
-                                <li><a href="http://localhost/jeantest/web/admin/deco">deconnexion</a></li>
-                            </ul>
-                        </li>
+
                         <?php
-                    }
-                    ?>
+                        if ($this->app->user()->isAuthenticated()) {
+                            ?>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Admin <span class="caret"></span></a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a href="http://localhost/jeantest/web/admin/news">News</a></li>
+                                    <li><a href="http://localhost/jeantest/web//admin/news-insert">insert news</a></li>
+                                    <li><a href="#">Something else here</a></li>
+                                    <li class="divider"></li>
+                                    <li><a href="#">Separated link</a></li>
+                                    <li class="divider"></li>
+                                    <li><a href="http://localhost/jeantest/web/admin/deco">deconnexion</a></li>
+                                </ul>
+                            </li>
+                            <?php
+                        }
+                        ?>
                     </ul>
                     <ul class="nav navbar-nav navbar-right hidden-md hidden-lg hidden-xs ">
                         <li class="" ><a href="se_connecter.php?page=connexion">se connecter</a></li>
@@ -88,6 +88,6 @@
             </div>
         </div>
 
-<?php echo $content; ?>
+        <?php echo $content; ?>
     </body>
 </html>
