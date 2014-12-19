@@ -53,13 +53,13 @@
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-md-8">
+		<div class="col-md-6">
 			<div class="jumbotron">
 				<h1>bienvenue sur photo malin</h1>
 				<p>photo malin vous permettra d'avoirs accés à un grand nombre de photos de grande qualité pour usage commercial à un prix imbatable et peut être trouver la perle rare, mais aussi de proposer vos photos a la vente afin de pourquoi pas taper dans l'oeil d'un grand magazine. Et oui gagner de l'argent avec vos photo c'est possible</p>
 			</div>
 		</div>
-		<div class="col-md-4">
+		<div class="col-md-6">
 			<div class="jumbotron">
                         <h1><?php echo $news['titre']; ?></h1>
 			<p class="auteur">Par <em><?php echo $news['auteur']; ?></em>, le <?php echo $news['dateAjout']->format('d/m/Y  H\hi'); ?></p>
@@ -74,7 +74,6 @@
     <!-- Include all compiled plugins (below), or include individual files as needed -->
 	<script>
 $(function () {
-   $('.carousel').carousel({ interval: 10000 });
    $('#0').click(function() { $('.carousel').carousel(0); });
    $('#1').click(function() { $('.carousel').carousel(1); });
    $('#2').click(function() { $('.carousel').carousel(2); });

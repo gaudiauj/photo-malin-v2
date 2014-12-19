@@ -56,7 +56,7 @@
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Admin <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
             <li><a href="http://localhost/jeantest/web/admin/news">News</a></li>
-            <li><a href="http://localhost/jeantest/web//admin/news-insert">insert news</a></li>
+            <li><a href="http://localhost/jeantest/web/admin/news-insert">insert news</a></li>
             <li><a href="#">Something else here</a></li>
             <li class="divider"></li>
             <li><a href="#">Separated link</a></li>

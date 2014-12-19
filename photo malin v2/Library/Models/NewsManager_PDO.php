@@ -87,5 +87,22 @@ class NewsManager_PDO extends NewsManager {
     $requete->bindValue(':contenu', $news->contenu());
     
     $requete->execute();
-  }   
+  } 
+  
+    public function delete($id)
+  {
+    $this->dao->exec('DELETE FROM news WHERE id = '.(int) $id);
+  }
+  
+  protected function update(News $news)
+  {
+    $requete = $this->dao->prepare('UPDATE news SET auteur = :auteur, titre = :titre, contenu = :contenu, dateModif = NOW() WHERE id = :id');
+    
+    $requete->bindValue(':titre', $news->titre());
+    $requete->bindValue(':auteur', $news->auteur());
+    $requete->bindValue(':contenu', $news->contenu());
+    $requete->bindValue(':id', $news->id(), \PDO::PARAM_INT);
+    
+    $requete->execute();
+  }
 }

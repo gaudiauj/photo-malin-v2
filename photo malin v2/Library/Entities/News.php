@@ -21,6 +21,7 @@ class News Extends \Library\Entity {
   const AUTEUR_INVALIDE = 1;
   const TITRE_INVALIDE = 2;
   const CONTENU_INVALIDE = 3;
+  const TITRE_TROP_LONG = 4;
   
   public function isValid()
   {
@@ -36,6 +37,10 @@ class News Extends \Library\Entity {
     {
       $this->erreurs[] = self::AUTEUR_INVALIDE;
     }
+     else if(strlen($auteur)>=15)
+    {
+        $this->erreurs[] = self::AUTEUR_INVALIDE;
+    }
     else
     {
       $this->auteur = $auteur;
@@ -47,6 +52,10 @@ class News Extends \Library\Entity {
     if (!is_string($titre) || empty($titre))
     {
       $this->erreurs[] = self::TITRE_INVALIDE;
+    }
+    else if(strlen($titre)>=20)
+    {
+        $this->erreurs[] = self::TITRE_TROP_LONG;
     }
     else
     {

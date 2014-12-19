@@ -1,5 +1,5 @@
 
 <div class="jumbotron">
-<h2>Ajouter une news</h2>
+<h2>Modifié une news</h2>
 <?php require '_form.php';?>
 </div>

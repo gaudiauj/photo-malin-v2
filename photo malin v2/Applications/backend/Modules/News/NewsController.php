@@ -63,4 +63,26 @@ class NewsController extends \Library\BackController {
     $this->page->addVars('news', $news);
   }
 
+  public function executeDelete(\Library\HTTPRequest $request)
+  {
+    $this->managers->getManagerOf('News')->delete($request->getData('id'));
+    
+    $this->app->user()->setFlash('La news a bien été supprimée !');
+    
+    $this->app->httpResponse()->redirect('news');
+  }
+  
+  public function executeUpdate(\Library\HTTPRequest $request)
+  {
+    if ($request->postExists('auteur'))
+    {
+      $this->processForm($request);
+    }
+    else
+    {
+      $this->page->addVars('news', $this->managers->getManagerOf('News')->getUnique($request->getData('id')));
+    }
+    
+    $this->page->addVars('title', 'Modification d\'une news');
+  }
 }

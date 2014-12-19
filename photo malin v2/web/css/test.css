@@ -19,6 +19,10 @@ right: 8px;
 {
     font-size: 10px;
 }
+  .jumbotron h1,
+  .jumbotron .h1 {
+    font-size: 36px;
+  }
 .news
 {
 display: block;
