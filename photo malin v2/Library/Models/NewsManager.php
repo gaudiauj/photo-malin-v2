@@ -29,7 +29,7 @@ abstract class NewsManager extends \Library\Manager{
   abstract public function getUnique($id);
   
    /**
-   * Méthode retournant unela derniere News.
+   * Méthode retournant la derniere News.
    * 
    * @return News La derniere news 
    */
