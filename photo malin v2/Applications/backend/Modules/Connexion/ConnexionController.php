@@ -16,7 +16,6 @@ class ConnexionController extends \Library\BackController
   public function executeIndex(\Library\HTTPRequest $request)
   {
     $this->page->addVars('title', 'Connexion');
-    
     if ($request->postExists('pseudo'))
     {
       $login = $request->postData('pseudo');
@@ -25,12 +24,19 @@ class ConnexionController extends \Library\BackController
       if ($login == $this->app->config()->get('login') && $password == $this->app->config()->get('pass'))
       {
         $this->app->user()->setAuthenticated(true);
-        $this->app->httpResponse()->redirect('.');
+        $this->app->httpResponse()->redirect('news');
       }
       else
       {
         $this->app->user()->setFlash('Le pseudo ou le mot de passe est incorrect.');
       }
     }
+  }
+  
+  public function executeDeco(\Library\HTTPRequest $request)
+  {
+      $this->page->addVars('title', 'deconnexion');
+           $this->app->user()->setAuthenticated(false);
+           $this->app->httpResponse()->redirect('.');
   }
 }

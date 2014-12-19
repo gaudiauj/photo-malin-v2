@@ -13,7 +13,7 @@
     <link href="../css/bootstrap.css" rel="stylesheet">
 	<link href="../css/test.css" rel="stylesheet">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-	
+	 <script src="../scripts/bootstrap.min.js"></script>
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -31,12 +31,12 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="index.php?page=accueil">Photo malin</a>
+          <a class="navbar-brand" href="../index.php?page=accueil">Photo malin</a>
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li class=" hidden-md hidden-sm"><a href="index.php?page=accueil">Accueil</a></li>
-			<li class=""><a href="inscrire.php?page=inscription">S'inscrire</a></li>
+            <li class=" hidden-md hidden-sm"><a href="../index.php?page=accueil">Accueil</a></li>
+			<li class=""><a href="../inscrire.php?page=inscription">S'inscrire</a></li>
 			<li class=""><a href="chat.php?page=chat">Chat</a></li>
 			<li class="" ><a href="photo.php?page=photos">photos</a></li>
           <!--  <li class="dropdown">
@@ -52,7 +52,19 @@
               </ul>
             </li>-->	
 			<li><a href="mailto:gaudiauj@gmail.com">Me contacter</a></li>
-         
+          <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Admin <span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href="http://localhost/jeantest/web/admin/news">News</a></li>
+            <li><a href="http://localhost/jeantest/web//admin/news-insert">insert news</a></li>
+            <li><a href="#">Something else here</a></li>
+            <li class="divider"></li>
+            <li><a href="#">Separated link</a></li>
+            <li class="divider"></li>
+            <li><a href="http://localhost/jeantest/web/admin/deco">deconnexion</a></li>
+          </ul>
+        </li>
+
         </div><!--/.nav-collapse -->
       </div>
     </div>

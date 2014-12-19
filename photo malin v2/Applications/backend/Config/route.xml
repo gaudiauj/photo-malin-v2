@@ -7,5 +7,8 @@ and open the template in the editor.
 
 
 <routes>
-    <route url="/jeantest/web/admin" module="Connexion" action="index" /> 
+    <route url="/jeantest/web/admin" module="Connexion" action="index" />
+    <route url="/jeantest/web/admin/deco" module="Connexion" action="deco" />
+    <route url="/jeantest/web/admin/news" module="news" action="index" />
+    <route url="/jeantest/web//admin/news-insert" module="News" action="insert" />
 </routes>

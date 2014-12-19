@@ -6,14 +6,14 @@
     <div class="row">					
         <div class="jumbotron" style="height: 600px;">
             <h2> connexion : </h2>
-            <form  method="post" class="form-horizontal" action="" id="inscription" role="form" enctype="multipart/form-data">					
+            <form  method="post" class="form-horizontal" action="" id="inscription" role="form">					
                 <div class="form-group" id="div_pseudo_insc">
-                    <label for="pseudo_insc" class="control-label">Pseudo</label>
-                    <input type="text" class="form-control" id="Pseudo" placeholder="Pseudo" ><br />						 						  
+                    <label for="pseudo" class="control-label">Pseudo</label>
+                    <input type="text" class="form-control" name="pseudo" id="Pseudo" placeholder="Pseudo" ><br />						 						  
                 </div>				  
                 <div class="form-group" id="div_mdp_insc">
-                    <label for="pass_insc" class=" control-label">mot de passe</label>						
-                    <input type="password" class="form-control" id="pass" placeholder="mot de passe"><br />						
+                    <label for="pass" class=" control-label">mot de passe</label>						
+                    <input type="password" name="pass" class="form-control" id="pass" placeholder="mot de passe"><br />						
                 </div>
                 <div class="form-group">
                     <div class="col-sm-10">

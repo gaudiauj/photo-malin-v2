@@ -6,7 +6,7 @@
  * and open the template in the editor.
  */
 namespace Library\Models;
-
+use \Library\Entities\News;
 /**
  * Description of NewsManager
  *
@@ -34,4 +34,37 @@ abstract class NewsManager extends \Library\Manager{
    * @return News La derniere news 
    */
   abstract public function getLast();
+
+  /**
+   * Méthode renvoyant le nombre de news total.
+   * @return int
+   */
+  abstract public function count();
+
+ 
+  /**
+   * Méthode permettant d'ajouter une news.
+   * @param $news News La news à ajouter
+   * @return void
+   */
+  abstract protected function add(News $news);
+  
+  /**
+   * Méthode permettant d'enregistrer une news.
+   * @param $news News la news à enregistrer
+   * @see self::add()
+   * @see self::modify()
+   * @return void
+   */
+     public function save(News $news)
+  {
+    if ($news->isValid())
+    {
+      $news->isNew() ? $this->add($news) : $this->modify($news);
+    }
+    else
+    {
+      throw new \RuntimeException('La news doit être validée pour être enregistrée');
+    }
+  }   
 }
