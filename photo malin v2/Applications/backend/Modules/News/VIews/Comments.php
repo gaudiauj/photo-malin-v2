@@ -10,4 +10,5 @@ foreach ($listeComments as $comments)
 }
 ?>
 </table>
+<?php require '_pagination.php';?>
 

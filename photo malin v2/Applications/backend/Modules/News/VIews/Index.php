@@ -13,4 +13,4 @@ foreach ($listeNews as $news)
 <a href="http://localhost/jeantest/web/admin/news-insert"><button type="button" class="btn btn-default" aria-label="Left Align">
   <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
 </button></a>
-
+<?php require '_pagination.php';?>

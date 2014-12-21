@@ -57,18 +57,33 @@ abstract class CommentsManager extends \Library\Manager {
      * @return Comment
      */
     abstract public function get($id);
-    
-     /**
+
+    /**
      * Méthode permettant d'obtenir tout les commentaires.
      * 
      * @return array
      */
-    abstract  public function getall();
-    
-   /**
-   * Méthode permettant de supprimer tout les commentaire dependant d'un news.
-   * @param $id int L'identifiant de la news.
-   * @return void
-   */
-   abstract public function deletNewsId($id);
+    abstract public function getall();
+
+    /**
+     * Méthode permettant de supprimer tout les commentaire dependant d'un news.
+     * @param $id int L'identifiant de la news.
+     * @return void
+     */
+    abstract public function deleteNewsId($id);
+
+    /**
+     * Méthode retournant une liste de commentaire demandée
+     * @param $debut int Le première com à sélectionner
+     * @param $limite int Le nombre de comm à sélectionner
+     * @return array La liste des news. Chaque entrée est une instance de Comment.
+     */
+    abstract public function getList($debut = -1, $limite = -1);
+
+    /**
+     * Méthode permettant de supprimer un commentaire.
+     * @param $id L'identifiant du commentaire à supprimer
+     * @return void
+     */
+    abstract public function delete($id);
 }

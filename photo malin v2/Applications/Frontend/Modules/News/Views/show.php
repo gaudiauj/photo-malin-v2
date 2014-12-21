@@ -53,7 +53,7 @@
                     <legend>
                         Posté par <strong><?php echo htmlspecialchars($comment['auteur']); ?></strong> le <?php echo $comment['date']->format('d/m/Y à H\hi'); ?>
                         <?php if ($user->isAuthenticated()) { ?> -
-        <a href="admin/comment-update-<?php echo $comment['id']; ?>"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>
+        <a href="admin/comment-update-<?php echo $comment['id']; ?>"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a> <a href="admin/comment-delete-<?php echo $comment['id']; ?>"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
       <?php } ?>
                     </legend>
                     <p><?php echo (nl2br(htmlspecialchars($comment['contenu']))); ?></p>

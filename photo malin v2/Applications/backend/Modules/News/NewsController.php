@@ -20,7 +20,12 @@ class NewsController extends \Library\BackController {
 
         $manager = $this->managers->getManagerOf('News');
 
-        $this->page->addVars('listeNews', $manager->getList());
+        $nombreNews = $this->app->config()->get('nombre_news');
+        $listeNews = $manager->getList(($request->getData('page') - 1) * $nombreNews, $request->getData('page') * $nombreNews);
+
+        $this->page->addVars('nombrepage', (int) round(($manager->count() / $nombreNews) + 0.5, 0, PHP_ROUND_HALF_UP));
+
+        $this->page->addVars('listeNews', $listeNews);
         $this->page->addVars('nombreNews', $manager->count());
     }
 
@@ -58,10 +63,10 @@ class NewsController extends \Library\BackController {
 
     public function executeDelete(\Library\HTTPRequest $request) {
         $this->managers->getManagerOf('News')->delete($request->getData('id'));
-        $this->managers->getManagerOf('comment')->deleteNewsId($request->getData('id'));
+        $this->managers->getManagerOf('Comments')->deleteNewsId($request->getData('id'));
         $this->app->user()->setFlash('La news a bien été supprimée !');
 
-        $this->app->httpResponse()->redirect('news');
+        $this->app->httpResponse()->redirect($request->previousURL());
     }
 
     public function executeUpdate(\Library\HTTPRequest $request) {
@@ -103,10 +108,10 @@ class NewsController extends \Library\BackController {
     public function executeComments(\Library\HTTPRequest $request) {
         $this->page->addVars('title', 'Gestion des commentaires');
 
+        $nombreComments = $this->app->config()->get('nombre_comments');
         $nombreCaracteres = $this->app->config()->get('nombre_caracteres_comments');
         $manager = $this->managers->getManagerOf('Comments');
-        $listeComments = $manager->getall();
-        
+        $listeComments = $manager->getList(($request->getData('page') - 1) * $nombreComments, $request->getData('page') * $nombreComments);
         foreach ($listeComments as $Comments) {
             if (strlen($Comments->contenu()) > $nombreCaracteres) {
                 $debut = substr($Comments->contenu(), 0, $nombreCaracteres);
@@ -115,9 +120,17 @@ class NewsController extends \Library\BackController {
                 $Comments->setContenu($debut);
             }
         }
-        
+        $this->page->addVars('nombrepage', (int) round(($manager->count() / $nombreComments) + 0.5, 0, PHP_ROUND_HALF_UP));
         $this->page->addVars('listeComments', $listeComments);
         $this->page->addVars('nombreComments', $manager->count());
+    }
+
+    public function executeDeleteComment(\Library\HTTPRequest $request) {
+        $this->managers->getManagerOf('Comments')->delete($request->getData('id'));
+
+        $this->app->user()->setFlash('Le commentaire a bien été supprimé !');
+
+        $this->app->httpResponse()->redirect($request->previousURL());
     }
 
 }
