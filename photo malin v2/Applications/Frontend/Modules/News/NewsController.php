@@ -55,6 +55,7 @@ class NewsController extends \Library\BackController {
                 'news' => $request->getData('id'),
                 'auteur' => $request->postData('pseudo'),
                 'contenu' => $request->postData('contenu')
+                
             ));
 
             if ($comment->isValid()) {

@@ -4,7 +4,7 @@
         <div class='message'></div>
     </div>
     <div class="row">					
-        <div class="jumbotron" style="height: 600px;">
+        <div class="jumbotron">
             <h2> connexion : </h2>
             <form  method="post" class="form-horizontal" action="" id="inscription" role="form">					
                 <div class="form-group" id="div_pseudo_insc">

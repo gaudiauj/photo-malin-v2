@@ -50,4 +50,53 @@ class CommentsManager_PDO extends CommentsManager
     
     return $comments;
   }
+  
+  protected function update(Comment $comment)
+  {
+    $q = $this->dao->prepare('UPDATE comments SET auteur = :auteur, contenu = :contenu WHERE id = :id');
+    
+    $q->bindValue(':auteur', $comment->auteur());
+    $q->bindValue(':contenu', $comment->contenu());
+    $q->bindValue(':id', $comment->id(), \PDO::PARAM_INT);
+    
+    $q->execute();
+  }
+  
+  public function get($id)
+  {
+    $q = $this->dao->prepare('SELECT id, news, auteur, contenu FROM comments WHERE id = :id');
+    $q->bindValue(':id', (int) $id, \PDO::PARAM_INT);
+    $q->execute();
+    
+    $q->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, '\Library\Entities\Comment');
+    
+    return $q->fetch();
+  }
+  
+   public function getall()
+  {
+    $q = $this->dao->prepare('SELECT * FROM comments ORDER BY id DESC');
+    $q->execute();
+    
+    $q->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, '\Library\Entities\Comment');
+    
+    $comments = $q->fetchAll();
+    
+    foreach ($comments as $comment)
+    {
+      $comment->setDate(new \DateTime($comment->date()));
+    }
+    
+    return $comments;
+  }
+  
+  public function count()
+  {
+    return $this->dao->query('SELECT COUNT(*) FROM comments')->fetchColumn();
+  }
+  
+  public function deletNewsId($id)
+  {
+      $this->dao->exec('DELETE FROM comments WHERE news = '.(int) $id);
+  }
 }

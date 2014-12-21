@@ -14,22 +14,18 @@
     <div class="item active">
       <img src="img/logotest.png" alt="chat">
       <div class="carousel-caption">
-        ...
       </div>
     </div>
     <div class="item">
       <img src="img/logotest2.jpg" alt="...">
       <div class="carousel-caption">
-        ...
       </div>
     </div>
 	  <div class="item">
       <img src="img/logotest3.jpg" alt="...">
       <div class="carousel-caption">
-        ...
       </div>
     </div>
-    ...
   </div>
 
   <!-- Controls -->

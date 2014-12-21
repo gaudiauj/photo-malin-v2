@@ -19,13 +19,16 @@
             <h2>Ajouter un commentaire</h2>
             <form action="" method="post">
                 <p>
-                    <?php if (isset($erreurs) && in_array(\Library\Entities\Comment::AUTEUR_INVALIDE, $erreurs)) echo 'L\'auteur est invalide.<br />'; ?>
+                    <?php if (isset($erreurs) && in_array(\Library\Entities\Comment::AUTEUR_INVALIDE, $erreurs)) echo 'L\'auteur est invalide.<br />';
+                    if (isset($erreurs) && in_array(\Library\Entities\Comment::AUTEUR_TROP_LONG, $erreurs)) echo 'L\'auteur est trop long 20 caracteres maximum.<br />'; ?>
                     <label>Pseudo</label>
                     <input type="text" name="pseudo" value="" /><br />
 
-                    <?php if (isset($erreurs) && in_array(\Library\Entities\Comment::CONTENU_INVALIDE, $erreurs)) echo 'Le contenu est invalide.<br />'; ?>
+                    <?php if (isset($erreurs) && in_array(\Library\Entities\Comment::CONTENU_INVALIDE, $erreurs)) echo 'Le contenu est invalide.<br />';
+                     if (isset($erreurs) && in_array(\Library\Entities\Comment::CONTENU_TROP_LONG, $erreurs)) echo 'Le contenu est trop long limité à 1200 caracteres.<br />';
+                    ?>
                     <label>Contenu</label>
-                    <textarea name="contenu" rows="7" cols="50"><?php if (isset($comment)) echo htmlspecialchars($comment['contenu']); ?></textarea><br />
+                    <textarea name="contenu" rows="7" cols="100"><?php if (isset($comment)) echo htmlspecialchars($comment['contenu']); ?></textarea><br />
 
                     <input type="submit" value="Commenter" />
                 </p>
@@ -45,12 +48,18 @@
 
             foreach ($comments as $comment) {
                 ?>
-                <fieldset>
+                <div class="comments" id=<?php echo("'comments-".$comment['id']."'");?>>
+                     <fieldset>
                     <legend>
                         Posté par <strong><?php echo htmlspecialchars($comment['auteur']); ?></strong> le <?php echo $comment['date']->format('d/m/Y à H\hi'); ?>
+                        <?php if ($user->isAuthenticated()) { ?> -
+        <a href="admin/comment-update-<?php echo $comment['id']; ?>"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>
+      <?php } ?>
                     </legend>
                     <p><?php echo (nl2br(htmlspecialchars($comment['contenu']))); ?></p>
-                </fieldset>
+                     </fieldset>
+                </div>
+                
     <?php
 }
 ?>

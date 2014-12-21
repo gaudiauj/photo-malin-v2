@@ -22,7 +22,9 @@ class Comment extends \Library\Entity {
 
     const AUTEUR_INVALIDE = 1;
     const CONTENU_INVALIDE = 2;
-
+    const AUTEUR_TROP_LONG = 3;
+    const CONTENU_TROP_LONG = 4;
+    
     public function isValid() {
         return !(empty($this->auteur) || empty($this->contenu));
     }
@@ -36,7 +38,12 @@ class Comment extends \Library\Entity {
     public function setAuteur($auteur) {
         if (!is_string($auteur) || empty($auteur)) {
             $this->erreurs[] = self::AUTEUR_INVALIDE;
-        } else {
+        } 
+         else if (strlen($auteur) > 20)
+        {
+             $this->erreurs[] = self::AUTEUR_TROP_LONG;
+        }
+        else {
             $this->auteur = $auteur;
         }
     }
@@ -44,7 +51,12 @@ class Comment extends \Library\Entity {
     public function setContenu($contenu) {
         if (!is_string($contenu) || empty($contenu)) {
             $this->erreurs[] = self::CONTENU_INVALIDE;
-        } else {
+        }
+        else if (strlen($contenu) > 1200)
+        {
+             $this->erreurs[] = self::CONTENU_TROP_LONG;
+        }
+        else {
             $this->contenu = $contenu;
         }
     }

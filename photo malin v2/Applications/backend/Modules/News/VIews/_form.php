@@ -13,7 +13,7 @@
     </div>
     <?php if (isset($erreurs) && in_array(\Library\Entities\News::CONTENU_INVALIDE, $erreurs)) echo 'Le contenu est invalide.<br />'; ?>
     <div class="form-group">
-        <label>Contenu</label><br /><textarea rows="8" cols="60" name="contenu"><?php if (isset($news)) echo $news['contenu']; ?></textarea><br />
+        <label>Contenu</label><br /><textarea rows="8" cols="100" name="contenu"><?php if (isset($news)) echo $news['contenu']; ?></textarea><br />
     </div>
 
     <?php

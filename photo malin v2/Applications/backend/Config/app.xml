@@ -2,4 +2,5 @@
 <definitions>
   <define var="login" value="admin" />
   <define var="pass" value="mdp" />
+  <define var="nombre_caracteres_comments" value="200"/>
 </definitions>
