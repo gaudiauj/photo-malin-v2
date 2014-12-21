@@ -38,19 +38,19 @@
             {
                 $('#message_insc').html("le pseudo doit faire au moins 4 caracteres").show();
                 $('span[id^="succes_pseudo"]').remove();
-                $('#div_pseudo_insc').removeClass("has-success has-feedback").addClass("has-error has-feedback").append(' <span id="alert_pseudo" class="glyphicon glyphicon-remove form-control-feedback"></span>')
+                $('#div_pseudo_insc').removeClass("has-success has-feedback").addClass("has-error has-feedback").append(' <span id="alert_pseudo" class="glyphicon glyphicon-remove form-control-feedback"></span>');
             }
             else if ($('#Pseudo_insc').val().length > 20)
             {
                 $('#message_insc').html("le pseudo doit faire moins de 20 caracteres").show();
                 $('span[id^="succes_pseudo"]').remove();
-                $('#div_pseudo_insc').removeClass("has-success has-feedback").addClass("has-error has-feedback").append(' <span id="alert_pseudo" class="glyphicon glyphicon-remove form-control-feedback"></span>')
+                $('#div_pseudo_insc').removeClass("has-success has-feedback").addClass("has-error has-feedback").append(' <span id="alert_pseudo" class="glyphicon glyphicon-remove form-control-feedback"></span>');
             }
             else
             {
                 $('#message_insc').hide();
                 $('span[id^="alert_pseudo"]').remove();
-                $('#div_pseudo_insc').removeClass("has-error has-feedback").addClass("has-success has-feedback").append(' <span  id="succes_pseudo" class="glyphicon glyphicon-ok form-control-feedback"></span>')
+                $('#div_pseudo_insc').removeClass("has-error has-feedback").addClass("has-success has-feedback").append(' <span  id="succes_pseudo" class="glyphicon glyphicon-ok form-control-feedback"></span>');
             }
 
         });
@@ -59,25 +59,25 @@
             {
                 $('#message_insc').html("le mot de passe doit faire au moins 6 caracteres").show();
                 $('span[id^="succes_mdp"]').remove();
-                $('#div_mdp_insc').removeClass("has-success has-feedback").addClass("has-error has-feedback").append(' <span id="alert_mdp" class="glyphicon glyphicon-remove form-control-feedback"></span>')
+                $('#div_mdp_insc').removeClass("has-success has-feedback").addClass("has-error has-feedback").append(' <span id="alert_mdp" class="glyphicon glyphicon-remove form-control-feedback"></span>');
             }
             else
             {
                 $('#message_insc').hide();
                 $('span[id^="alert_mdp"]').remove();
-                $('#div_mdp_insc').removeClass("has-error has-feedback").addClass("has-success has-feedback").append(' <span  id="succes_mdp" class="glyphicon glyphicon-ok form-control-feedback"></span>')
+                $('#div_mdp_insc').removeClass("has-error has-feedback").addClass("has-success has-feedback").append(' <span  id="succes_mdp" class="glyphicon glyphicon-ok form-control-feedback"></span>');
             }
             if ($('#pass_insc_verif').val() == $('#pass_insc').val())
             {
                 $('#message_insc').hide();
                 $('span[id^="alert_mdp_verif"]').remove();
-                $('#div_mdp_insc_verif').removeClass("has-error has-feedback").addClass("has-success has-feedback").append(' <span  id="succes_mdp_verif" class="glyphicon glyphicon-ok form-control-feedback"></span>')
+                $('#div_mdp_insc_verif').removeClass("has-error has-feedback").addClass("has-success has-feedback").append(' <span  id="succes_mdp_verif" class="glyphicon glyphicon-ok form-control-feedback"></span>');
             }
             else
             {
                 $('#message_insc').html("les mots de passe doivent etre identique").show();
                 $('span[id^="succes_mdp_verif"]').remove();
-                $('#div_mdp_insc_verif').removeClass("has-success has-feedback").addClass("has-error has-feedback").append(' <span id="alert_mdp_verif" class="glyphicon glyphicon-remove form-control-feedback"></span>')
+                $('#div_mdp_insc_verif').removeClass("has-success has-feedback").addClass("has-error has-feedback").append(' <span id="alert_mdp_verif" class="glyphicon glyphicon-remove form-control-feedback"></span>');
             }
 
         });
@@ -86,13 +86,13 @@
             {
                 $('#message_insc').html("les mots de passe doivent etre identique").show();
                 $('span[id^="succes_mdp_verif"]').remove();
-                $('#div_mdp_insc_verif').removeClass("has-success has-feedback").addClass("has-error has-feedback").append(' <span id="alert_mdp_verif" class="glyphicon glyphicon-remove form-control-feedback"></span>')
+                $('#div_mdp_insc_verif').removeClass("has-success has-feedback").addClass("has-error has-feedback").append(' <span id="alert_mdp_verif" class="glyphicon glyphicon-remove form-control-feedback"></span>');
             }
             else
             {
                 $('#message_insc').hide();
                 $('span[id^="alert_mdp_verif"]').remove();
-                $('#div_mdp_insc_verif').removeClass("has-error has-feedback").addClass("has-success has-feedback").append(' <span  id="succes_mdp_verif" class="glyphicon glyphicon-ok form-control-feedback"></span>')
+                $('#div_mdp_insc_verif').removeClass("has-error has-feedback").addClass("has-success has-feedback").append(' <span  id="succes_mdp_verif" class="glyphicon glyphicon-ok form-control-feedback"></span>');
             }
 
         });

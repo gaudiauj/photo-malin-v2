@@ -16,9 +16,9 @@ use \Library\Entities\Membre;
 abstract class MembreManager extends \Library\Manager {
 
     /**
-     * Méthode permettant d'ajouter un membre
-     * @param $membre Le commentaire à ajouter
-     * @return void
+     * Méthode permettant d'ajouter un membre retourne true si tout c'est bien passé false si le pseudo ou mail existe déja dans la bdd
+     * @param $membre Le membre à ajouter
+     * @return boolean
      */
     abstract protected function add(Membre $membre);
 
@@ -29,5 +29,12 @@ abstract class MembreManager extends \Library\Manager {
             throw new \RuntimeException('Le membre doit être valide pour être enregistrée');
         }
     }
+    
+     /**
+     * Méthode permettant de savoir si un membre existe déja
+     * @param $membre le membte à verifier
+     * @return boolean
+     */
+    abstract protected function exist(Membre $membre);
 
 }
