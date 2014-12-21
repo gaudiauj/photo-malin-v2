@@ -1,9 +1,6 @@
 <div class="container">
-    <div class="row">	
-        <div class='message'></div>
-    </div>
     <div class="row">					
-        <div class="jumbotron" style="height: 600px;">
+        <div class="jumbotron" >
             <h2> INSCRIPTION : </h2>
             <div class="alert alert-danger" id="message_insc"></div>	
             <form  method="post" class="form-horizontal" action="" id="inscription" role="form" enctype="multipart/form-data">					
@@ -40,6 +37,12 @@
             if ($('#Pseudo_insc').val().length < 4)
             {
                 $('#message_insc').html("le pseudo doit faire au moins 4 caracteres").show();
+                $('span[id^="succes_pseudo"]').remove();
+                $('#div_pseudo_insc').removeClass("has-success has-feedback").addClass("has-error has-feedback").append(' <span id="alert_pseudo" class="glyphicon glyphicon-remove form-control-feedback"></span>')
+            }
+            else if ($('#Pseudo_insc').val().length > 20)
+            {
+                $('#message_insc').html("le pseudo doit faire moins de 20 caracteres").show();
                 $('span[id^="succes_pseudo"]').remove();
                 $('#div_pseudo_insc').removeClass("has-success has-feedback").addClass("has-error has-feedback").append(' <span id="alert_pseudo" class="glyphicon glyphicon-remove form-control-feedback"></span>')
             }
@@ -97,8 +100,8 @@
         $('#bouton_inscrire').click(function (e) {
             e.preventDefault();
             {
-                $.post('inscription', {pseudo: $('#Pseudo_insc').val(), pass_insc: $('#pass_insc').val(), pass_insc_verif: $('#pass_insc_verif').val(), mail_insc: $('#mail_insc').val()}, function (data) {
-                    $('.message').html(data);
+                $.post('inscription-back', {pseudo: $('#Pseudo_insc').val(), pass_insc: $('#pass_insc').val(), pass_insc_verif: $('#pass_insc_verif').val(), mail_insc: $('#mail_insc').val()}, function (data) {
+                    $('#message_insc').html(data).show();
                 });
             }
         });

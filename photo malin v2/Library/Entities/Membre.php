@@ -15,7 +15,7 @@ namespace Library\Entities;
  */
 class Membre extends \Library\Entity {
 
-    private $pseudo;
+    protected $pseudo;
     protected $pass;
     protected $mail;
     protected $dateInscription;

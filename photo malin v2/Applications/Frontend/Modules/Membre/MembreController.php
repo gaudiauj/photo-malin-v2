@@ -15,19 +15,21 @@ namespace Applications\Frontend\Modules\Membre;
  */
 class MembreController extends \Library\BackController {
 
-    public function executeInscrire(\Library\HTTPRequest $request) {
+    public function executeAfficheInscrire(\Library\HTTPRequest $request) {
         $this->page->addVars('title', 'Inscription');
-        $manager = $this->managers->getManagerOf('Membre');
-
-        if ($request->postExists('pseudo') && $request->postData('pass_insc') == $request->postData('pass_insc_verif')) {
+    }
+    
+    public function executeInscription(\Library\HTTPRequest $request) {
+            $manager = $this->managers->getManagerOf('Membre');
+                if ($request->postExists('pseudo') && $request->postData('pass_insc') == $request->postData('pass_insc_verif')) {
             $membre = new \Library\Entities\Membre(array(
                 'pseudo' => $request->postData('pseudo'),
                 'pass' => $request->postData('pass_insc'),
                 'mail' => $request->postData('mail_insc')
             ));
-            if ($membre->isValid()) {
-                echo("coucou");
-                $manager->add($membre);                
+            if ($membre->isValid()) {                
+                $manager->add($membre);
+                $this->page->addVars('reussite', true);
             } else {
                 $this->page->addVars('erreurs', $membre->erreurs());
             }

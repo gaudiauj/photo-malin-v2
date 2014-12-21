@@ -36,7 +36,7 @@
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
             <li class=" hidden-md hidden-sm"><a href="http://localhost/jeantest/web/index.php?page=accueil">Accueil</a></li>
-			<li class=""><a href="http://localhost/jeantest/web/inscrire.php?page=inscription">S'inscrire</a></li>
+			<li class=""><a href="http://localhost/jeantest/web/inscription">S'inscrire</a></li>
 			<li class=""><a href="chat.php?page=chat">Chat</a></li>
 			<li class="" ><a href="photo.php?page=photos">photos</a></li>
           <!--  <li class="dropdown">

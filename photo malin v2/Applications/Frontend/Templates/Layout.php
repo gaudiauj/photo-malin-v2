@@ -36,7 +36,7 @@
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
                         <li class=" hidden-md hidden-sm"><a href="index.php?page=accueil">Accueil</a></li>
-                        <li class=""><a href="inscrire.php?page=inscription">S'inscrire</a></li>
+                        <li class=""><a href="inscription">S'inscrire</a></li>
                         <li class=""><a href="chat.php?page=chat">Chat</a></li>
                         <li class="" ><a href="photo.php?page=photos">photos</a></li>
                         <!--  <li class="dropdown">
