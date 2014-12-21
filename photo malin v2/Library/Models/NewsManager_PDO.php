@@ -47,7 +47,6 @@ class NewsManager_PDO extends NewsManager {
         $requete->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, '\Library\Entities\News');
 
         if ($news = $requete->fetch()) {
-            var_dump($news);
             $news->setDateAjout(new \DateTime($news->dateAjout()));
             $news->setDateModif(new \DateTime($news->dateModif()));
 

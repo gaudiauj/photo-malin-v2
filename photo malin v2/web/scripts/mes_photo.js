@@ -19,7 +19,7 @@
 	
 	// chargement de nouvelle image quand on est en bas de la page
     $window.scroll(function () {
-		if ($window.height() + $window.scrollTop() == $(document).height()) {
+		if ($window.height() + $window.scrollTop() >= $(document).height()-1) {
                      plusphoto++;
 					 ajax();
                  }

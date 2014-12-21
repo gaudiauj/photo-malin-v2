@@ -61,7 +61,6 @@ class NewsController extends \Library\BackController {
             if ($comment->isValid()) {
                 $this->managers->getManagerOf('Comments')->save($comment);
                 $this->app->httpResponse()->redirect('news-' . $request->getData('id'));
-
             } else {
                 $this->page->addVars('erreurs', $comment->erreurs());
             }

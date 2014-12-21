@@ -94,7 +94,7 @@ class NewsController extends \Library\BackController {
 
                 $this->app->user()->setFlash('Le commentaire a bien été modifié !');
 
-                $this->app->httpResponse()->redirect('/news-' . $request->postData('news') . '.html');
+                $this->app->httpResponse()->redirect('/news-page-'.$request->postData('news'));
             } else {
                 $this->page->addVars('erreurs', $comment->erreurs());
             }
