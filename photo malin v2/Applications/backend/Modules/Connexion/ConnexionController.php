@@ -24,7 +24,7 @@ class ConnexionController extends \Library\BackController
       if ($login == $this->app->config()->get('login') && $password == $this->app->config()->get('pass'))
       {
         $this->app->user()->setAuthenticated(true);
-        $this->app->httpResponse()->redirect('news');
+        $this->app->httpResponse()->redirect('news-page-1');
       }
       else
       {
@@ -37,6 +37,6 @@ class ConnexionController extends \Library\BackController
   {
       $this->page->addVars('title', 'deconnexion');
            $this->app->user()->setAuthenticated(false);
-           $this->app->httpResponse()->redirect('.');
+           $this->app->httpResponse()->redirect('../');
   }
 }

@@ -24,7 +24,7 @@ class NewsController extends \Library\BackController {
         $listeNews = $manager->getList(($request->getData('page') - 1) * $nombreNews, $request->getData('page') * $nombreNews);
 
         $this->page->addVars('nombrepage', (int) round(($manager->count() / $nombreNews) + 0.5, 0, PHP_ROUND_HALF_UP));
-
+        $this->page->addVars('page', $request->getData('page'));
         $this->page->addVars('listeNews', $listeNews);
         $this->page->addVars('nombreNews', $manager->count());
     }
@@ -107,11 +107,12 @@ class NewsController extends \Library\BackController {
 
     public function executeComments(\Library\HTTPRequest $request) {
         $this->page->addVars('title', 'Gestion des commentaires');
-
+        
         $nombreComments = $this->app->config()->get('nombre_comments');
         $nombreCaracteres = $this->app->config()->get('nombre_caracteres_comments');
         $manager = $this->managers->getManagerOf('Comments');
         $listeComments = $manager->getList(($request->getData('page') - 1) * $nombreComments, $request->getData('page') * $nombreComments);
+      
         foreach ($listeComments as $Comments) {
             if (strlen($Comments->contenu()) > $nombreCaracteres) {
                 $debut = substr($Comments->contenu(), 0, $nombreCaracteres);
@@ -120,7 +121,8 @@ class NewsController extends \Library\BackController {
                 $Comments->setContenu($debut);
             }
         }
-        $this->page->addVars('nombrepage', (int) round(($manager->count() / $nombreComments) + 0.5, 0, PHP_ROUND_HALF_UP));
+        $this->page->addVars('page', $request->getData('page'));
+        $this->page->addVars('nombrepage', (int) ceil (($manager->count() / $nombreComments)));
         $this->page->addVars('listeComments', $listeComments);
         $this->page->addVars('nombreComments', $manager->count());
     }
