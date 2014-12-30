@@ -2,4 +2,5 @@
 <definitions>
   <define var="nombre_news" value="5" />
   <define var="nombre_caracteres" value="300" />
+  <define var="nombre_comm_profil" value="5"/>
 </definitions>

@@ -33,7 +33,7 @@ class MembreManager_PDO extends MembreManager {
     }
 
     protected function exist(Membre $membre) {
-        $requete = $this->dao->prepare('SELECT * FROM membre WHERE pseudo= :pseudo OR mail= :mail');
+        $requete = $this->dao->prepare('SELECT id FROM membre WHERE pseudo= :pseudo OR mail= :mail');
         $requete->bindValue(':pseudo', $membre->getPseudo());
         $requete->bindValue(':mail', $membre->getMail());
         $requete->execute();
@@ -45,6 +45,30 @@ class MembreManager_PDO extends MembreManager {
         } else {
             return FALSE;
         }
+    }
+    
+     public function verifMembre(Membre $membre) {
+        $requete = $this->dao->prepare('SELECT * FROM membre WHERE pseudo= :pseudo AND pass= :pass');
+        $requete->bindValue(':pseudo', $membre->getPseudo());
+        $requete->bindValue(':pass', $membre->getPass());
+        $requete->execute();
+
+        $requete->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, '\Library\Entities\Membre');
+
+        if ($membre = $requete->fetch()) {
+            return TRUE;
+        } else {
+            return FALSE;
+        }
+    }
+    
+    public function getPseudo($id)
+    {
+        $requete = $this->dao->prepare('SELECT pseudo FROM membre WHERE id= :id');
+        $requete->bindValue(':id', $id, PDO::PARAM_INT);
+        $requete->execute();
+        
+        return $requete->fetch();        
     }
 
 }

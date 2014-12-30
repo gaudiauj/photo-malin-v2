@@ -36,5 +36,19 @@ abstract class MembreManager extends \Library\Manager {
      * @return boolean
      */
     abstract protected function exist(Membre $membre);
+    
+    
+     /**
+     * Méthode permettant de verifier si un membre existe avec son pseudo et pass.
+     * @param $membre le membte à verifier
+     * @return boolean
+     */
+    abstract public function verifMembre(Membre $membre);
 
+     /**
+     * Méthode permettant de recuperer le pseudo d'un membre
+     * @param $id id du membre
+     * @return Strings
+     */
+    abstract public function getPseudo($id);
 }

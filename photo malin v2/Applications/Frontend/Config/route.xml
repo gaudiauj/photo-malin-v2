@@ -14,5 +14,8 @@ and open the template in the editor.
 <route url="/jeantest/web/news" module="News" action="news" /> 
 <route url="/jeantest/web/news-([0-9]+)" module="News" action="show" vars="id"/>
 <route url="/jeantest/web/inscription-back" module="Membre" action="inscription" /> 
-<route url="/jeantest/web/inscription" module="Membre" action="afficheinscrire" /> 
+<route url="/jeantest/web/inscription" module="Membre" action="afficheinscrire" />
+<route url="/jeantest/web/connexion" module="Membre" action="connexion" /> 
+<route url="/jeantest/web/deconnexion" module="Membre" action="deconnexion" />
+<route url="/jeantest/web/profil-([\w]+)" module="Membre" action="profil" vars="pseudo"/>
 </routes>

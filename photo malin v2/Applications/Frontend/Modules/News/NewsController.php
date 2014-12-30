@@ -50,7 +50,7 @@ class NewsController extends \Library\BackController {
         $this->page->addVars('title', $news->titre());
         $this->page->addVars('news', $news);
         $this->page->addVars('comments', $this->managers->getManagerOf('Comments')->getListOf($news->id()));
-        if ($request->postExists('pseudo')) {
+        if ($request->postExists('pseudo') && $request->postData('pseudo')== $this->app->user()->getAttribute('pseudo')) {
             $comment = new \Library\Entities\Comment(array(
                 'news' => $request->getData('id'),
                 'auteur' => $request->postData('pseudo'),

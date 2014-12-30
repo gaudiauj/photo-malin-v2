@@ -25,6 +25,7 @@ class Membre extends \Library\Entity {
     const MDP_INVALIDE = 3;
     const MDP_TROP_COURT = 4;
     const MAIL_INVALIDE = 5;
+    const PSEUDO_CARACTERE_SPECIAUX = 6;
 
     
         public function isValid() {
@@ -37,7 +38,12 @@ class Membre extends \Library\Entity {
             $this->erreurs[] = self::PSEUDO_INVALIDE;
         } else if (strlen($pseudo) > 20) {
             $this->erreurs[] = self::PSEUDO_TROP_LONG;
-        } else {
+        }
+        else if (!preg_match("#^[\w \-]+$#", $pseudo))
+        {
+            $this->erreurs[] = self::PSEUDO_CARACTERE_SPECIAUX;
+        }
+        else {
             $this->pseudo = $pseudo;
         }
     }

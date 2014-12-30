@@ -31,28 +31,15 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="index.php?page=accueil">Photo malin</a>
+                    <a class="navbar-brand" href="http://localhost/jeantest/web/">Photo malin</a>
                 </div>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                        <li class=" hidden-md hidden-sm"><a href="index.php?page=accueil">Accueil</a></li>
-                        <li class=""><a href="inscription">S'inscrire</a></li>
+                        <li class=" hidden-md hidden-sm"><a href="http://localhost/jeantest/web/">Accueil</a></li>
+                        <li class=""><a href="http://localhost/jeantest/web/inscription">S'inscrire</a></li>
                         <li class=""><a href="chat.php?page=chat">Chat</a></li>
                         <li class="" ><a href="photo.php?page=photos">photos</a></li>
-                        <!--  <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">photo <b class="caret"></b></a>
-                            <ul class="dropdown-menu">
-                                              <li class="dropdown-header">photos</li>
-                              <li><a href="photo.php?page=photos">photos public</a></li>
-                              <li><a href="#">mes photos</a></li>
-                              <li class="divider"></li>
-                              <li class="dropdown-header">Nav header</li>
-                              <li><a href="#">Separated link</a></li>
-                              <li><a href="#">One more separated link</a></li>		
-                            </ul>
-                          </li>-->	
                         <li><a href="mailto:gaudiauj@gmail.com">Me contacter</a></li>
-
                         <?php
                         if ($this->app->user()->isAuthenticated()) {
                             ?>
@@ -61,7 +48,7 @@
                                 <ul class="dropdown-menu" role="menu">
                                     <li><a href="http://localhost/jeantest/web/admin/news-page-1">News</a></li>
                                     <li><a href="http://localhost/jeantest/web/admin/news-insert">insert news</a></li>
-                                     <li><a href="http://localhost/jeantest/web/admin/comment-list-page-1">liste commentaire</a></li>
+                                    <li><a href="http://localhost/jeantest/web/admin/comment-list-page-1">liste commentaire</a></li>
                                     <li class="divider"></li>
                                     <li><a href="#">Separated link</a></li>
                                     <li class="divider"></li>
@@ -76,19 +63,23 @@
                         <li class="" ><a href="se_connecter.php?page=connexion">se connecter</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right hidden-sm">
-                        <li> <form class="navbar-form navbar-left" >
-                                <input type="text" class="form-control" id="pseudo_nav" placeholder="pseudo"> </form>
-                        </li>              
-
-                        <li><form class="navbar-form navbar-left" > <input type="password" id="nav_pass" class="form-control" placeholder="mot de passe"></form> </li>
-                        <li> <button type="button" id="nav_connexion" class="btn btn-default">Connexion</button></li>
-
+                        <?php
+                        if ($this->app->user()->getAttribute('pseudo')) {
+                            ?>
+                            <li><a href="deconnexion"><button type="button" id="nav_connexion" class="btn btn-default">Deconnexion</button></a></li>
+                            <?php
+                        } else {
+                            ?>
+                            <li><a href="connexion" ><button type="button" id="nav_connexion" class="btn btn-default">Connexion</button></a></li>
+                            <?php
+                        }
+                        ?>
                     </ul>
                 </div><!--/.nav-collapse -->
             </div>
         </div>
         <div class="container-fluid">
-        <?php echo $content; ?>
-            </div>
+            <?php echo $content; ?>
+        </div>
     </body>
 </html>

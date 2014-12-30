@@ -18,5 +18,6 @@ else if (isset($reussite) && !$reussite)
      if (isset($erreurs) && in_array(\Library\Entities\Membre::PSEUDO_TROP_LONG, $erreurs)) echo 'Le pseudo est trop long, 20 caractere  max.<br />';
      if (isset($erreurs) && in_array(\Library\Entities\Membre::MDP_INVALIDE, $erreurs)) echo 'Le mot de passe est invalide.<br />';
      if (isset($erreurs) && in_array(\Library\Entities\Membre::MDP_TROP_COURT, $erreurs)) echo 'Le mot de passe est trop court 6 caractéres mini.<br />';
+     if (isset($erreurs) && in_array(\Library\Entities\Membre::PSEUDO_CARACTERE_SPECIAUX, $erreurs)) echo 'Le pseudo ne peut pas contenir de caractere speciaux. <br />';
      if (isset($erreurs) && in_array(\Library\Entities\Membre::MAIL_INVALIDE, $erreurs)) echo 'Le mail est invalide. <br />';
 }

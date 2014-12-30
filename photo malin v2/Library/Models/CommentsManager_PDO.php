@@ -117,4 +117,27 @@ class CommentsManager_PDO extends CommentsManager {
         $this->dao->exec('DELETE FROM comments WHERE id = ' . (int) $id);
     }
 
+    function getListMembre($pseudo, $debut = -1, $limite = -1) {
+        $sql = 'SELECT * FROM comments WHERE auteur = :pseudo ORDER BY id DESC ';
+
+        if ($debut != -1 || $limite != -1) {
+            $sql .= ' LIMIT ' . (int) $limite . ' OFFSET ' . (int) $debut;
+        }
+
+        $requete = $this->dao->prepare($sql);
+        $requete->bindValue(':pseudo', $pseudo, \PDO::PARAM_STR);
+        $requete->execute();
+
+        $requete->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, '\Library\Entities\Comment');
+
+        $listeComments = $requete->fetchAll();
+
+        foreach ($listeComments as $comment) {
+            $comment->setDate(new \DateTime($comment->date()));
+        }
+        $requete->closeCursor();
+
+        return $listeComments;
+    }
+
 }

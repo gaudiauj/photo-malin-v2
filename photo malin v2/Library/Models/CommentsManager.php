@@ -86,4 +86,13 @@ abstract class CommentsManager extends \Library\Manager {
      * @return void
      */
     abstract public function delete($id);
+    
+       /**
+     * Méthode retournant une liste de commentaire demandée d'un membre precis
+     * @param $debut int Le première com à sélectionner
+     * @param $limite int Le nombre de comm à sélectionner
+     * @param $pseudo string Le pseudo du membre
+     * @return array La liste des news. Chaque entrée est une instance de Comment.
+     */
+    abstract public function getListMembre($pseudo, $debut = -1, $limite = -1);
 }
