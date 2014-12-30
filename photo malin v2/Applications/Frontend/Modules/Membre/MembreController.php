@@ -20,26 +20,31 @@ class MembreController extends \Library\BackController {
     }
 
     public function executeInscription(\Library\HTTPRequest $request) {
+        $this->page->addVars('noLayout', TRUE);
         $manager = $this->managers->getManagerOf('Membre');
-        if ($request->postExists('pseudo') && $request->postData('pass_insc') == $request->postData('pass_insc_verif')) {
-            $membre = new \Library\Entities\Membre(array(
-                'pseudo' => $request->postData('pseudo'),
-                'pass' => $request->postData('pass_insc'),
-                'mail' => $request->postData('mail_insc')
-            ));
-            if ($membre->isValid()) {
-                if ($manager->add($membre)) {
-                    $this->page->addVars('reussite', true);
-                } else {
-                    $this->page->addVars('reussite', FALSE);
-                }
+        if ($request->postExists('pseudo')) {
+            if (!($request->postData('pass_insc') == $request->postData('pass_insc_verif'))) {
+                $this->page->addVars('matchpass', FALSE);
             } else {
-                $this->page->addVars('erreurs', $membre->erreurs());
+                $membre = new \Library\Entities\Membre(array(
+                    'pseudo' => $request->postData('pseudo'),
+                    'pass' => $request->postData('pass_insc'),
+                    'mail' => $request->postData('mail_insc')
+                ));
+                if ($membre->isValid()) {
+                    if ($manager->add($membre)) {
+                        $this->page->addVars('reussite', true);
+                    } else {
+                        $this->page->addVars('reussite', FALSE);
+                    }
+                } else {
+                    $this->page->addVars('erreurs', $membre->erreurs());
+                }
             }
         }
     }
-    
-     public function executeConnexion (\Library\HTTPRequest $request) {
+
+    public function executeConnexion(\Library\HTTPRequest $request) {
         $this->page->addVars('title', 'Connexion');
         if ($request->postExists('pseudo_co') && $request->postData('pass_insc') == $request->postData('pass_insc_verif')) {
             $membre = new \Library\Entities\Membre(array(
@@ -56,25 +61,23 @@ class MembreController extends \Library\BackController {
             $this->page->addVars('connecte', $connecte);
         }
     }
-    
+
     public function executeDeconnexion(\Library\HTTPRequest $request) {
-     $this->page->addVars('title', 'Deconnexion');
-     $this->app->user()->setAttribute('pseudo', null);
-     $this->app->httpResponse()->redirect($request->previousURL());
+        $this->page->addVars('title', 'Deconnexion');
+        $this->app->user()->setAttribute('pseudo', null);
+        $this->app->httpResponse()->redirect($request->previousURL());
     }
-    
+
     public function executeProfil(\Library\HTTPRequest $request) {
         $pseudo = $request->getData('pseudo');
-        $this->page->addVars('title', 'profils de '.$pseudo);
-        $this->page->addVars('pseudo',$pseudo);
-        $commentsManager=$this->managers->getManagerOf('Comments');
+        $this->page->addVars('title', 'profils de ' . $pseudo);
+        $this->page->addVars('pseudo', $pseudo);
+        $commentsManager = $this->managers->getManagerOf('Comments');
         $nombrecomm = $this->app->config()->get('nombre_comm_profil');
-        $comments=$commentsManager->getListMembre( $pseudo, 0, $nombrecomm);
-        $this->page->addVars('nombrecomm',$nombrecomm);
-        
-        $this->page->addVars('comments', $comments);        
+        $comments = $commentsManager->getListMembre($pseudo, 0, $nombrecomm);
+        $this->page->addVars('nombrecomm', $nombrecomm);
+
+        $this->page->addVars('comments', $comments);
     }
-    
 
 }
-

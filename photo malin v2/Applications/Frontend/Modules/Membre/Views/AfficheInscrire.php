@@ -101,7 +101,21 @@
             e.preventDefault();
             {
                 $.post('inscription-back', {pseudo: $('#Pseudo_insc').val(), pass_insc: $('#pass_insc').val(), pass_insc_verif: $('#pass_insc_verif').val(), mail_insc: $('#mail_insc').val()}, function (data) {
-                    $('#message_insc').html(data).show();
+                    var obj = jQuery.parseJSON(data);
+                    if (obj["reussi"] != undefined)
+                    {
+                        $('#message_insc').removeClass("alert-danger").addClass("alert-success").html(obj['reussi']).show();
+                    }
+                    else
+                    {
+                        $('#message_insc').html("")
+                        jQuery.each(obj, function (i, val) {
+                            $('#message_insc').append(val);
+                            alert(val);
+                        });
+                      
+                        $('#message_insc').wrapAll(document.createElement("p")).show();
+                    }
                 });
             }
         });

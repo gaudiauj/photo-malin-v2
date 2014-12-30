@@ -28,9 +28,9 @@ class Page extends ApplicationComponent {
 
     public function getGeneratedPage() {
         if (!file_exists($this->contentFile)) {
-            throw new \RuntimeException('La vue spécifiée n\'existe pas : '.$this->contentFile);
+            throw new \RuntimeException('La vue spécifiée n\'existe pas : ' . $this->contentFile);
         }
-        header( 'content-type: text/html; charset=utf-8' );
+        header('content-type: text/html; charset=utf-8');
         $user = $this->app->user();
 
         extract($this->vars);
@@ -38,10 +38,13 @@ class Page extends ApplicationComponent {
         ob_start();
         require $this->contentFile;
         $content = ob_get_clean();
-
-        ob_start();
-        require __DIR__ . '/../Applications/' . $this->app->name() . '/Templates/layout.php';
-        return ob_get_clean();
+        if (!isset($noLayout)) {
+            ob_start();
+            require __DIR__ . '/../Applications/' . $this->app->name() . '/Templates/layout.php';
+            return ob_get_clean();
+        } else {
+            return $content;
+        }
     }
 
     public function setContentFile($contentFile) {
