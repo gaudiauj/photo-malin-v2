@@ -95,4 +95,11 @@ abstract class CommentsManager extends \Library\Manager {
      * @return array La liste des news. Chaque entrée est une instance de Comment.
      */
     abstract public function getListMembre($pseudo, $debut = -1, $limite = -1);
+    
+        
+     /**
+     * Méthode retournant le nombre de commentaire 
+     * @return int nombre de commentaire.
+     */
+    abstract public function count();
 }

@@ -104,14 +104,13 @@
                     var obj = jQuery.parseJSON(data);
                     if (obj["reussi"] != undefined)
                     {
-                        $('#message_insc').removeClass("alert-danger").addClass("alert-success").html(obj['reussi']).show();
+                        $('#message_insc').removeClass("alert-danger").addClass("alert-success").html(obj['reussi']).wrapAll(document.createElement("p")).show();
                     }
                     else
                     {
                         $('#message_insc').html("")
                         jQuery.each(obj, function (i, val) {
                             $('#message_insc').append(val);
-                            alert(val);
                         });
                       
                         $('#message_insc').wrapAll(document.createElement("p")).show();

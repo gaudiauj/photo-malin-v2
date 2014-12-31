@@ -26,13 +26,13 @@ class MembreManager_PDO extends MembreManager {
             $requete->bindValue(':pass', $membre->getPass());
 
             $requete->execute();
-            return TRUE;
+            return true;
         } else {
-            return FALSE;
+            return false;
         }
     }
 
-    protected function exist(Membre $membre) {
+    public function exist(Membre $membre) {
         $requete = $this->dao->prepare('SELECT id FROM membre WHERE pseudo= :pseudo OR mail= :mail');
         $requete->bindValue(':pseudo', $membre->getPseudo());
         $requete->bindValue(':mail', $membre->getMail());
@@ -41,9 +41,9 @@ class MembreManager_PDO extends MembreManager {
         $requete->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, '\Library\Entities\Membre');
 
         if ($membre = $requete->fetch()) {
-            return TRUE;
+            return true;
         } else {
-            return FALSE;
+            return false;
         }
     }
     
@@ -56,9 +56,9 @@ class MembreManager_PDO extends MembreManager {
         $requete->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, '\Library\Entities\Membre');
 
         if ($membre = $requete->fetch()) {
-            return TRUE;
+            return true;
         } else {
-            return FALSE;
+            return false;
         }
     }
     
@@ -69,6 +69,29 @@ class MembreManager_PDO extends MembreManager {
         $requete->execute();
         
         return $requete->fetch();        
+    }
+    
+     public function getList($debut = -1, $limite = -1) {
+        $sql = 'SELECT pseudo,dateInscription,mail,id FROM membre ORDER BY id DESC';
+        if ($debut != -1 || $limite != -1) {
+            $sql .= ' LIMIT ' . (int) $limite . ' OFFSET ' . (int) $debut;
+        }
+        $requete = $this->dao->query($sql);
+        $requete->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, '\Library\Entities\Membre');
+
+        $listeMembre = $requete->fetchAll();
+
+        foreach ($listeMembre as $Membre) {
+            $Membre->setDateInscription(new \DateTime($Membre->getDateInscription()));
+        }
+
+        $requete->closeCursor();
+
+        return $listeMembre;
+    }
+    
+     public function count() {
+        return $this->dao->query('SELECT COUNT(*) FROM membre')->fetchColumn();
     }
 
 }

@@ -48,5 +48,4 @@ class HTTPResponse extends ApplicationComponent{
     
     $this->send();
   }
-
 }

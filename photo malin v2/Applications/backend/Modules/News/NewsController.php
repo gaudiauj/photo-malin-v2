@@ -17,16 +17,23 @@ class NewsController extends \Library\BackController {
 
     public function executeIndex(\Library\HTTPRequest $request) {
         $this->page->addVars('title', 'Gestion des news');
-
         $manager = $this->managers->getManagerOf('News');
-
+        $page=$request->getData('page');
         $nombreNews = $this->app->config()->get('nombre_news');
-        $listeNews = $manager->getList(($request->getData('page') - 1) * $nombreNews, $request->getData('page') * $nombreNews);
+        $nombrePage=(int) ceil($manager->count() / $nombreNews);
+         if ($page > 0 && $page <= $nombrePage) {
+        $listeNews = $manager->getList(($page - 1) * $nombreNews, $page * $nombreNews);
 
-        $this->page->addVars('nombrepage', (int) round(($manager->count() / $nombreNews) + 0.5, 0, PHP_ROUND_HALF_UP));
-        $this->page->addVars('page', $request->getData('page'));
+        $this->page->addVars('nombrepage', $nombrePage);
+        $this->page->addVars('page', $page);
         $this->page->addVars('listeNews', $listeNews);
         $this->page->addVars('nombreNews', $manager->count());
+        $this->page->addVars('url', 'news');
+         }
+         else
+         {
+            $this->app->httpResponse()->redirect404();
+         }
     }
 
     public function executeInsert(\Library\HTTPRequest $request) {
@@ -94,7 +101,7 @@ class NewsController extends \Library\BackController {
 
                 $this->app->user()->setFlash('Le commentaire a bien été modifié !');
 
-                $this->app->httpResponse()->redirect('/news-page-'.$request->postData('news'));
+                $this->app->httpResponse()->redirect('/news-page-' . $request->postData('news'));
             } else {
                 $this->page->addVars('erreurs', $comment->erreurs());
             }
@@ -107,24 +114,20 @@ class NewsController extends \Library\BackController {
 
     public function executeComments(\Library\HTTPRequest $request) {
         $this->page->addVars('title', 'Gestion des commentaires');
-        
+        $page = $request->getData('page');
         $nombreComments = $this->app->config()->get('nombre_comments');
-        $nombreCaracteres = $this->app->config()->get('nombre_caracteres_comments');
         $manager = $this->managers->getManagerOf('Comments');
-        $listeComments = $manager->getList(($request->getData('page') - 1) * $nombreComments, $request->getData('page') * $nombreComments);
-      
-        foreach ($listeComments as $Comments) {
-            if (strlen($Comments->contenu()) > $nombreCaracteres) {
-                $debut = substr($Comments->contenu(), 0, $nombreCaracteres);
-                $debut = substr($debut, 0, strrpos($debut, ' ')) . '...';
-
-                $Comments->setContenu($debut);
-            }
+        $nombrePage = (int) ceil(($manager->count() / $nombreComments));       
+        if ($page > 0 && $page <= $nombrePage) {
+            $listeComments = $manager->getList(($page - 1) * $nombreComments, $page * $nombreComments);
+            $this->processContenuComments($request, $listeComments);
+            $this->page->addVars('page', $page);
+            $this->page->addVars('nombrepage', $nombrePage);
+            $this->page->addVars('nombreComments', $manager->count());
+            $this->page->addVars('url', 'comment-list');
+        } else {
+            $this->app->httpResponse()->redirect404();
         }
-        $this->page->addVars('page', $request->getData('page'));
-        $this->page->addVars('nombrepage', (int) ceil (($manager->count() / $nombreComments)));
-        $this->page->addVars('listeComments', $listeComments);
-        $this->page->addVars('nombreComments', $manager->count());
     }
 
     public function executeDeleteComment(\Library\HTTPRequest $request) {
@@ -133,6 +136,20 @@ class NewsController extends \Library\BackController {
         $this->app->user()->setFlash('Le commentaire a bien été supprimé !');
 
         $this->app->httpResponse()->redirect($request->previousURL());
+    }
+
+    public function processContenuComments(\Library\HTTPRequest $request, $listeComments) {
+        $nombreCaracteres = $this->app->config()->get('nombre_caracteres_comments');
+
+        foreach ($listeComments as $Comments) {
+            if (strlen($Comments->contenu()) > $nombreCaracteres) {
+                $debut = substr($Comments->contenu(), 0, $nombreCaracteres);
+                $debut = substr($debut, 0, strrpos($debut, ' ')) . '...';
+
+                $Comments->setContenu($debut);
+            }
+        }
+        $this->page->addVars('listeComments', $listeComments);
     }
 
 }

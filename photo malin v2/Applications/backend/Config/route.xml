@@ -16,4 +16,5 @@ and open the template in the editor.
     <route url="/jeantest/web/admin/comment-update-([0-9]+)" module="News" action="updateComment" vars="id" />
     <route url="/jeantest/web/admin/comment-delete-([0-9]+)" module="News" action="deleteComment" vars="id" />
     <route url="/jeantest/web/admin/comment-list-page-([0-9]+)" module="News" action="Comments" vars="page" />
+    <route url="/jeantest/web/admin/membre-list-page-([0-9]+)" module="Membre" action="membres" vars="page" />
 </routes>

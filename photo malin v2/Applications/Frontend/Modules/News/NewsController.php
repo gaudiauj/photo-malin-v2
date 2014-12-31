@@ -74,7 +74,6 @@ class NewsController extends \Library\BackController {
         if (empty($news)) {
             $this->app->httpResponse()->redirect404();
         }
-
         $this->page->addVars('title', $news->titre());
         $this->page->addVars('news', $news);
     }

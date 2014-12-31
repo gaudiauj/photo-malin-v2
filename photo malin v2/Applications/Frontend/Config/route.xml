@@ -18,4 +18,5 @@ and open the template in the editor.
 <route url="/jeantest/web/connexion" module="Membre" action="connexion" /> 
 <route url="/jeantest/web/deconnexion" module="Membre" action="deconnexion" />
 <route url="/jeantest/web/profil-([\w]+)" module="Membre" action="profil" vars="pseudo"/>
+<route url="/jeantest/web/profil-([\w]+)" module="Membre" action="noprofil" vars="pseudo"/>
 </routes>

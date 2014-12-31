@@ -50,7 +50,7 @@
                                     <li><a href="http://localhost/jeantest/web/admin/news-insert">insert news</a></li>
                                     <li><a href="http://localhost/jeantest/web/admin/comment-list-page-1">liste commentaire</a></li>
                                     <li class="divider"></li>
-                                    <li><a href="#">Separated link</a></li>
+                                    <li><a href="http://localhost/jeantest/web/admin/membre-list-page-1">liste membre</a></li>
                                     <li class="divider"></li>
                                     <li><a href="http://localhost/jeantest/web/admin/deco">deconnexion</a></li>
                                 </ul>

@@ -20,11 +20,11 @@ class MembreController extends \Library\BackController {
     }
 
     public function executeInscription(\Library\HTTPRequest $request) {
-        $this->page->addVars('noLayout', TRUE);
+        $this->page->addVars('noLayout', true);
         $manager = $this->managers->getManagerOf('Membre');
         if ($request->postExists('pseudo')) {
             if (!($request->postData('pass_insc') == $request->postData('pass_insc_verif'))) {
-                $this->page->addVars('matchpass', FALSE);
+                $this->page->addVars('matchpass', false);
             } else {
                 $membre = new \Library\Entities\Membre(array(
                     'pseudo' => $request->postData('pseudo'),
@@ -35,7 +35,7 @@ class MembreController extends \Library\BackController {
                     if ($manager->add($membre)) {
                         $this->page->addVars('reussite', true);
                     } else {
-                        $this->page->addVars('reussite', FALSE);
+                        $this->page->addVars('reussite', false);
                     }
                 } else {
                     $this->page->addVars('erreurs', $membre->erreurs());
@@ -69,15 +69,40 @@ class MembreController extends \Library\BackController {
     }
 
     public function executeProfil(\Library\HTTPRequest $request) {
+        $membreManager = $this->managers->getManagerOf('Membre');
         $pseudo = $request->getData('pseudo');
         $this->page->addVars('title', 'profils de ' . $pseudo);
         $this->page->addVars('pseudo', $pseudo);
+        $this->page->addVars('profil', true);
+        $membre = new \Library\Entities\Membre(array(
+                'pseudo' => $pseudo              
+            ));
+        
+        if($membreManager->exist($membre))
+        {        
+        $this->processComments($request,$pseudo);
+        }
+        
+        else
+        {
+            $this->page->addVars('profil', false);
+        }
+    }
+    
+    protected function processComments(\Library\HTTPRequest $request,$pseudo){
+        $nombreCaracteres = $this->app->config()->get('nombre_caracteres'); 
         $commentsManager = $this->managers->getManagerOf('Comments');
         $nombrecomm = $this->app->config()->get('nombre_comm_profil');
-        $comments = $commentsManager->getListMembre($pseudo, 0, $nombrecomm);
+        $listeComments = $commentsManager->getListMembre($pseudo, 0, $nombrecomm);
+        foreach ($listeComments as $Comments) {
+            if (strlen($Comments->contenu()) > $nombreCaracteres) {
+                $debut = substr($Comments->contenu(), 0, $nombreCaracteres);
+                $debut = substr($debut, 0, strrpos($debut, ' ')) . '...';
+
+                $Comments->setContenu($debut);
+            }
+        }
         $this->page->addVars('nombrecomm', $nombrecomm);
-
-        $this->page->addVars('comments', $comments);
+        $this->page->addVars('comments', $listeComments);
     }
-
 }

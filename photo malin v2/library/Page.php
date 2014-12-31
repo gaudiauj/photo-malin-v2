@@ -38,13 +38,14 @@ class Page extends ApplicationComponent {
         ob_start();
         require $this->contentFile;
         $content = ob_get_clean();
-        if (!isset($noLayout)) {
-            ob_start();
-            require __DIR__ . '/../Applications/' . $this->app->name() . '/Templates/layout.php';
-            return ob_get_clean();
-        } else {
-            return $content;
-        }
+        if (isset($noLayout)) {
+            if ($noLayout) {
+                return $content;
+            }
+        } 
+        ob_start();
+        require __DIR__ . '/../Applications/' . $this->app->name() . '/Templates/layout.php';
+        return ob_get_clean();
     }
 
     public function setContentFile($contentFile) {
