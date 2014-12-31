@@ -15,12 +15,15 @@ use \Library\Entities\News;
  *
  * @author jeang
  */
-class NewsManager_PDO extends NewsManager {
+class NewsManager_PDO extends NewsManager
+{
 
-    public function getList($debut = -1, $limite = -1) {
+    public function getList($debut = -1, $limite = -1)
+    {
         $sql = 'SELECT id, auteur, titre, contenu, dateAjout, dateModif FROM news ORDER BY id DESC';
 
-        if ($debut != -1 || $limite != -1) {
+        if ($debut != -1 || $limite != -1)
+        {
             $sql .= ' LIMIT ' . (int) $limite . ' OFFSET ' . (int) $debut;
         }
 
@@ -29,7 +32,8 @@ class NewsManager_PDO extends NewsManager {
 
         $listeNews = $requete->fetchAll();
 
-        foreach ($listeNews as $news) {
+        foreach ($listeNews as $news)
+        {
             $news->setDateAjout(new \DateTime($news->dateAjout()));
             $news->setDateModif(new \DateTime($news->dateModif()));
         }
@@ -39,14 +43,16 @@ class NewsManager_PDO extends NewsManager {
         return $listeNews;
     }
 
-    public function getUnique($id) {
+    public function getUnique($id)
+    {
         $requete = $this->dao->prepare('SELECT id, auteur, titre, contenu, dateAjout, dateModif FROM news WHERE id = :id');
         $requete->bindValue(':id', (int) $id, \PDO::PARAM_INT);
         $requete->execute();
 
         $requete->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, '\Library\Entities\News');
 
-        if ($news = $requete->fetch()) {
+        if ($news = $requete->fetch())
+        {
             $news->setDateAjout(new \DateTime($news->dateAjout()));
             $news->setDateModif(new \DateTime($news->dateModif()));
 
@@ -55,14 +61,16 @@ class NewsManager_PDO extends NewsManager {
 
         return null;
     }
-    
-    public function getLast() {
+
+    public function getLast()
+    {
         $requete = $this->dao->prepare('SELECT  auteur, titre, contenu, dateAjout, dateModif FROM news ORDER BY id DESC LIMIT 1');
         $requete->execute();
-          
+
         $requete->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, '\Library\Entities\News');
 
-        if ($news = $requete->fetch()) {
+        if ($news = $requete->fetch())
+        {
             $news->setDateAjout(new \DateTime($news->dateAjout()));
             $news->setDateModif(new \DateTime($news->dateModif()));
 
@@ -71,37 +79,38 @@ class NewsManager_PDO extends NewsManager {
 
         return null;
     }
-    
-     public function count()
-  {
-    return $this->dao->query('SELECT COUNT(*) FROM news')->fetchColumn();
-  }
 
-  protected function add(News $news)
-  {
-    $requete = $this->dao->prepare('INSERT INTO news SET auteur = :auteur, titre = :titre, contenu = :contenu, dateAjout = NOW(), dateModif = NOW()');
-    
-    $requete->bindValue(':titre', $news->titre());
-    $requete->bindValue(':auteur', $news->auteur());
-    $requete->bindValue(':contenu', $news->contenu());
-    
-    $requete->execute();
-  } 
-  
+    public function count()
+    {
+        return $this->dao->query('SELECT COUNT(*) FROM news')->fetchColumn();
+    }
+
+    protected function add(News $news)
+    {
+        $requete = $this->dao->prepare('INSERT INTO news SET auteur = :auteur, titre = :titre, contenu = :contenu, dateAjout = NOW(), dateModif = NOW()');
+
+        $requete->bindValue(':titre', $news->titre());
+        $requete->bindValue(':auteur', $news->auteur());
+        $requete->bindValue(':contenu', $news->contenu());
+
+        $requete->execute();
+    }
+
     public function delete($id)
-  {
-    $this->dao->exec('DELETE FROM news WHERE id = '.(int) $id);
-  }
-  
-  protected function update(News $news)
-  {
-    $requete = $this->dao->prepare('UPDATE news SET auteur = :auteur, titre = :titre, contenu = :contenu, dateModif = NOW() WHERE id = :id');
-    
-    $requete->bindValue(':titre', $news->titre());
-    $requete->bindValue(':auteur', $news->auteur());
-    $requete->bindValue(':contenu', $news->contenu());
-    $requete->bindValue(':id', $news->id(), \PDO::PARAM_INT);
-    
-    $requete->execute();
-  }
+    {
+        $this->dao->exec('DELETE FROM news WHERE id = ' . (int) $id);
+    }
+
+    protected function update(News $news)
+    {
+        $requete = $this->dao->prepare('UPDATE news SET auteur = :auteur, titre = :titre, contenu = :contenu, dateModif = NOW() WHERE id = :id');
+
+        $requete->bindValue(':titre', $news->titre());
+        $requete->bindValue(':auteur', $news->auteur());
+        $requete->bindValue(':contenu', $news->contenu());
+        $requete->bindValue(':id', $news->id(), \PDO::PARAM_INT);
+
+        $requete->execute();
+    }
+
 }

@@ -13,62 +13,78 @@ namespace Library;
  *
  * @author jeang
  */
-abstract class Entity implements \ArrayAccess {
+abstract class Entity implements \ArrayAccess
+{
 
     protected $erreurs = array();
     protected $id;
 
-    public function __construct(array $donnees = array()) {
-        if (!empty($donnees)) {
+    public function __construct(array $donnees = array())
+    {
+        if (!empty($donnees))
+        {
             $this->hydrate($donnees);
         }
     }
 
-    public function isNew() {
+    public function isNew()
+    {
         return empty($this->id);
     }
 
-    public function erreurs() {
+    public function erreurs()
+    {
         return $this->erreurs;
     }
 
-    public function id() {
+    public function id()
+    {
         return $this->id;
     }
 
-    public function setId($id) {
+    public function setId($id)
+    {
         $this->id = (int) $id;
     }
 
-    public function hydrate(array $donnees) {
-        foreach ($donnees as $attribut => $valeur) {
+    public function hydrate(array $donnees)
+    {
+        foreach ($donnees as $attribut => $valeur)
+        {
             $methode = 'set' . ucfirst($attribut);
 
-            if (is_callable(array($this, $methode))) {
+            if (is_callable(array($this, $methode)))
+            {
                 $this->$methode($valeur);
             }
         }
     }
 
-    public function offsetGet($var) {
-        if (isset($this->$var) && is_callable(array($this, $var))) {
+    public function offsetGet($var)
+    {
+        if (isset($this->$var) && is_callable(array($this, $var)))
+        {
             return $this->$var();
         }
     }
 
-    public function offsetSet($var, $value) {
+    public function offsetSet($var, $value)
+    {
         $method = 'set' . ucfirst($var);
 
-        if (isset($this->$var) && is_callable(array($this, $method))) {
+        if (isset($this->$var) && is_callable(array($this, $method)))
+        {
             $this->$method($value);
         }
     }
 
-    public function offsetExists($var) {
+    public function offsetExists($var)
+    {
         return isset($this->$var) && is_callable(array($this, $var));
     }
 
-    public function offsetUnset($var) {
+    public function offsetUnset($var)
+    {
         throw new \Exception('Impossible de supprimer une quelconque valeur');
     }
 

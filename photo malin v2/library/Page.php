@@ -13,21 +13,26 @@ namespace Library;
  *
  * @author jeang
  */
-class Page extends ApplicationComponent {
+class Page extends ApplicationComponent
+{
 
     protected $contentFile;
     protected $vars = array();
 
-    public function addVars($var, $value) {
-        if (!is_string($var) || is_numeric($var) || empty($var)) {
+    public function addVars($var, $value)
+    {
+        if (!is_string($var) || is_numeric($var) || empty($var))
+        {
             throw new \InvalidArgumentException('mauvais nom de variable');
         }
 
         $this->vars[$var] = $value;
     }
 
-    public function getGeneratedPage() {
-        if (!file_exists($this->contentFile)) {
+    public function getGeneratedPage()
+    {
+        if (!file_exists($this->contentFile))
+        {
             throw new \RuntimeException('La vue spécifiée n\'existe pas : ' . $this->contentFile);
         }
         header('content-type: text/html; charset=utf-8');
@@ -38,18 +43,22 @@ class Page extends ApplicationComponent {
         ob_start();
         require $this->contentFile;
         $content = ob_get_clean();
-        if (isset($noLayout)) {
-            if ($noLayout) {
+        if (isset($noLayout))
+        {
+            if ($noLayout)
+            {
                 return $content;
             }
-        } 
+        }
         ob_start();
         require __DIR__ . '/../Applications/' . $this->app->name() . '/Templates/layout.php';
         return ob_get_clean();
     }
 
-    public function setContentFile($contentFile) {
-        if (!is_string($contentFile) || empty($contentFile)) {
+    public function setContentFile($contentFile)
+    {
+        if (!is_string($contentFile) || empty($contentFile))
+        {
             throw new \InvalidArgumentException('La vue spécifiée est invalide');
         }
 

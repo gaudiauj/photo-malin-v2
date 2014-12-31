@@ -3,17 +3,17 @@
         <div class="jumbotron" >
             <h2> CONNEXION : </h2>
             <?php
-            if(isset($connecte) && $connecte)
+            if (isset($connecte) && $connecte)
             {
+                ?>
+                <div class="alert alert-success" role="alert">Vous êtes maintenant connecté !</div>
+                <?php
+            } else if (isset($connecte))
+            {
+                ?>
+                <div class="alert alert-danger" id="message_insc">Mauvais mot de passe ou mauvais pseudo</div>
+            <?php }
             ?>
-            <div class="alert alert-success" role="alert">Vous êtes maintenant connecté !</div>
-            <?php
-            }
-                else if (isset($connecte)) {
-            ?>
-            <div class="alert alert-danger" id="message_insc">Mauvais mot de passe ou mauvais pseudo</div>
-            <?php
-            }?>
             <form  method="post" class="form-horizontal" action="" id="inscription" role="form" enctype="multipart/form-data">					
                 <div class="form-group" id="div_pseudo_co">
                     <label for="pseudo_insc" class="control-label">Pseudo</label>

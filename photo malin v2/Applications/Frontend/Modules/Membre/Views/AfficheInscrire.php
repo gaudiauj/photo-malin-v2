@@ -112,7 +112,7 @@
                         jQuery.each(obj, function (i, val) {
                             $('#message_insc').append(val);
                         });
-                      
+
                         $('#message_insc').wrapAll(document.createElement("p")).show();
                     }
                 });

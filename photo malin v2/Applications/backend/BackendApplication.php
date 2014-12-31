@@ -13,27 +13,28 @@ namespace Applications\Backend;
  *
  * @author jeang
  */
-class BackendApplication extends \Library\Application {
-    
-    public function __construct() {
+class BackendApplication extends \Library\Application
+{
+
+    public function __construct()
+    {
         parent::__construct();
-        $this->name="Backend";               
+        $this->name = "Backend";
     }
-    
+
     public function run()
     {
         if ($this->user->isAuthenticated())
         {
             $controller = $this->getController();
-        }
-        else
+        } else
         {
-            $controller = new Modules\Connexion\ConnexionController ($this, 'Connexion', 'index' );
+            $controller = new Modules\Connexion\ConnexionController($this, 'Connexion', 'index');
         }
         $controller->execute();
-        
-       $this->httpResponse->setPage($controller->page());
-       $this->httpResponse->send();
+
+        $this->httpResponse->setPage($controller->page());
+        $this->httpResponse->send();
     }
-    
+
 }

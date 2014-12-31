@@ -13,22 +13,26 @@ namespace Applications\Backend\Modules\Membre;
  *
  * @author jeang
  */
-class membreController extends \Library\BackController {
+class membreController extends \Library\BackController
+{
 
-    public function executeMembres(\Library\HTTPRequest $request) {
+    public function executeMembres(\Library\HTTPRequest $request)
+    {
         $this->page->addVars('title', 'Gestion des membres');
         $nombreMembres = $this->app->config()->get('nombre_membres');
         $manager = $this->managers->getManagerOf('Membre');
         $page = $request->getData('page');
         $nombrePage = (int) ceil(($manager->count() / $nombreMembres));
-        if ($page > 0 && $page <= $nombrePage) {
+        if ($page > 0 && $page <= $nombrePage)
+        {
             $listeMembre = $manager->getList(($page - 1) * $nombreMembres, $page * $nombreMembres);
             $this->page->addVars('page', $page);
             $this->page->addVars('nombrepage', $nombrePage);
             $this->page->addVars('listeMembres', $listeMembre);
             $this->page->addVars('nombreMembres', $manager->count());
             $this->page->addVars('url', 'membre-list');
-        } else {
+        } else
+        {
             $this->app->httpResponse()->redirect404();
         }
     }

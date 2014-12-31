@@ -5,7 +5,8 @@
  * and open the template in the editor.
  */
 
-foreach ($listeNews as $news) {
+foreach ($listeNews as $news)
+{
     ?>
     <div class="row">
         <div class="col-md-12">

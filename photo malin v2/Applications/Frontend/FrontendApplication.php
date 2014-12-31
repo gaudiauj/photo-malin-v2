@@ -13,15 +13,18 @@ namespace Applications\Frontend;
  *
  * @author jeang
  */
-class FrontendApplication extends \Library\Application {
+class FrontendApplication extends \Library\Application
+{
 
-    public function __construct() {
+    public function __construct()
+    {
         parent::__construct();
 
         $this->name = 'Frontend';
     }
 
-    public function run() {
+    public function run()
+    {
         $controller = $this->getController();
         $controller->execute();
 

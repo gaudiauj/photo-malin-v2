@@ -15,9 +15,11 @@ use \Library\Entities\Comment;
  *
  * @author jeang
  */
-class CommentsManager_PDO extends CommentsManager {
+class CommentsManager_PDO extends CommentsManager
+{
 
-    protected function add(Comment $comment) {
+    protected function add(Comment $comment)
+    {
         $q = $this->dao->prepare('INSERT INTO comments SET news = :news, auteur = :auteur, contenu = :contenu, date = NOW()');
 
         $q->bindValue(':news', $comment->news(), \PDO::PARAM_INT);
@@ -29,8 +31,10 @@ class CommentsManager_PDO extends CommentsManager {
         $comment->setId($this->dao->lastInsertId());
     }
 
-    public function getListOf($news) {
-        if (!ctype_digit($news)) {
+    public function getListOf($news)
+    {
+        if (!ctype_digit($news))
+        {
             throw new \InvalidArgumentException('L\'identifiant de la news passé doit être un nombre entier valide');
         }
 
@@ -42,14 +46,16 @@ class CommentsManager_PDO extends CommentsManager {
 
         $comments = $q->fetchAll();
 
-        foreach ($comments as $comment) {
+        foreach ($comments as $comment)
+        {
             $comment->setDate(new \DateTime($comment->date()));
         }
 
         return $comments;
     }
 
-    protected function update(Comment $comment) {
+    protected function update(Comment $comment)
+    {
         $q = $this->dao->prepare('UPDATE comments SET auteur = :auteur, contenu = :contenu WHERE id = :id');
 
         $q->bindValue(':auteur', $comment->auteur());
@@ -59,7 +65,8 @@ class CommentsManager_PDO extends CommentsManager {
         $q->execute();
     }
 
-    public function get($id) {
+    public function get($id)
+    {
         $q = $this->dao->prepare('SELECT id, news, auteur, contenu FROM comments WHERE id = :id');
         $q->bindValue(':id', (int) $id, \PDO::PARAM_INT);
         $q->execute();
@@ -69,7 +76,8 @@ class CommentsManager_PDO extends CommentsManager {
         return $q->fetch();
     }
 
-    public function getall() {
+    public function getall()
+    {
         $q = $this->dao->prepare('SELECT * FROM comments ORDER BY id DESC');
         $q->execute();
 
@@ -77,25 +85,30 @@ class CommentsManager_PDO extends CommentsManager {
 
         $comments = $q->fetchAll();
 
-        foreach ($comments as $comment) {
+        foreach ($comments as $comment)
+        {
             $comment->setDate(new \DateTime($comment->date()));
         }
 
         return $comments;
     }
 
-    public function count() {
+    public function count()
+    {
         return $this->dao->query('SELECT COUNT(*) FROM comments')->fetchColumn();
     }
 
-    public function deleteNewsId($id) {
+    public function deleteNewsId($id)
+    {
         $this->dao->exec('DELETE FROM comments WHERE news = ' . (int) $id);
     }
 
-    public function getList($debut = -1, $limite = -1) {
+    public function getList($debut = -1, $limite = -1)
+    {
         $sql = 'SELECT * FROM comments ORDER BY id DESC';
 
-        if ($debut != -1 || $limite != -1) {
+        if ($debut != -1 || $limite != -1)
+        {
             $sql .= ' LIMIT ' . (int) $limite . ' OFFSET ' . (int) $debut;
         }
 
@@ -104,7 +117,8 @@ class CommentsManager_PDO extends CommentsManager {
 
         $listeComments = $requete->fetchAll();
 
-        foreach ($listeComments as $comment) {
+        foreach ($listeComments as $comment)
+        {
             $comment->setDate(new \DateTime($comment->date()));
         }
 
@@ -113,14 +127,17 @@ class CommentsManager_PDO extends CommentsManager {
         return $listeComments;
     }
 
-    public function delete($id) {
+    public function delete($id)
+    {
         $this->dao->exec('DELETE FROM comments WHERE id = ' . (int) $id);
     }
 
-    function getListMembre($pseudo, $debut = -1, $limite = -1) {
+    function getListMembre($pseudo, $debut = -1, $limite = -1)
+    {
         $sql = 'SELECT * FROM comments WHERE auteur = :pseudo ORDER BY id DESC ';
 
-        if ($debut != -1 || $limite != -1) {
+        if ($debut != -1 || $limite != -1)
+        {
             $sql .= ' LIMIT ' . (int) $limite . ' OFFSET ' . (int) $debut;
         }
 
@@ -132,7 +149,8 @@ class CommentsManager_PDO extends CommentsManager {
 
         $listeComments = $requete->fetchAll();
 
-        foreach ($listeComments as $comment) {
+        foreach ($listeComments as $comment)
+        {
             $comment->setDate(new \DateTime($comment->date()));
         }
         $requete->closeCursor();

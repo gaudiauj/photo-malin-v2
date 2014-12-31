@@ -15,7 +15,8 @@ use \Library\Entities\Membre;
  *
  * @author jeang
  */
-abstract class MembreManager extends \Library\Manager {
+abstract class MembreManager extends \Library\Manager
+{
 
     /**
      * Méthode permettant d'ajouter un membre retourne true si tout c'est bien passé false si le pseudo ou mail existe déja dans la bdd
@@ -24,10 +25,13 @@ abstract class MembreManager extends \Library\Manager {
      */
     abstract protected function add(Membre $membre);
 
-    public function save(News $news) {
-        if ($news->isValid()) {
+    public function save(News $news)
+    {
+        if ($news->isValid())
+        {
             $news->isNew() ? $this->add($news) : $this->update($news);
-        } else {
+        } else
+        {
             throw new \RuntimeException('Le membre doit être valide pour être enregistrée');
         }
     }

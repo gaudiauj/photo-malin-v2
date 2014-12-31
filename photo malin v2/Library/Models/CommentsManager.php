@@ -15,7 +15,8 @@ namespace Library\Models;
  */
 use \Library\Entities\Comment;
 
-abstract class CommentsManager extends \Library\Manager {
+abstract class CommentsManager extends \Library\Manager
+{
 
     /**
      * Méthode permettant d'ajouter un commentaire
@@ -29,10 +30,13 @@ abstract class CommentsManager extends \Library\Manager {
      * @param $comment Le commentaire à enregistrer
      * @return void
      */
-    public function save(Comment $comment) {
-        if ($comment->isValid()) {
+    public function save(Comment $comment)
+    {
+        if ($comment->isValid())
+        {
             $comment->isNew() ? $this->add($comment) : $this->update($comment);
-        } else {
+        } else
+        {
             throw new \RuntimeException('Le commentaire doit être validé pour être enregistré');
         }
     }
@@ -86,8 +90,8 @@ abstract class CommentsManager extends \Library\Manager {
      * @return void
      */
     abstract public function delete($id);
-    
-       /**
+
+    /**
      * Méthode retournant une liste de commentaire demandée d'un membre precis
      * @param $debut int Le première com à sélectionner
      * @param $limite int Le nombre de comm à sélectionner
@@ -95,9 +99,8 @@ abstract class CommentsManager extends \Library\Manager {
      * @return array La liste des news. Chaque entrée est une instance de Comment.
      */
     abstract public function getListMembre($pseudo, $debut = -1, $limite = -1);
-    
-        
-     /**
+
+    /**
      * Méthode retournant le nombre de commentaire 
      * @return int nombre de commentaire.
      */
