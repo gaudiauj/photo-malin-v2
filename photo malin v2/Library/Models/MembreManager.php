@@ -27,9 +27,11 @@ abstract class MembreManager extends \Library\Manager
 
     public function save(News $news)
     {
-        if ($news->isValid()) {
+        if ($news->isValid())
+        {
             $news->isNew() ? $this->add($news) : $this->update($news);
-        } else {
+        } else
+        {
             throw new \RuntimeException('Le membre doit être valide pour être enregistrée');
         }
     }
@@ -67,11 +69,4 @@ abstract class MembreManager extends \Library\Manager
      * @return int nombre de membre.
      */
     abstract public function count();
-
-    /**
-     * Méthode permettant de supprimer un membre.
-     * @param $id L'identifiant du commentaire à supprimer
-     * @return void
-     */
-    abstract public function delete($pseudo);
 }

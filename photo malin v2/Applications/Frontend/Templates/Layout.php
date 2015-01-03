@@ -41,7 +41,8 @@
                         <li class="" ><a href="photo.php?page=photos">photos</a></li>
                         <li><a href="mailto:gaudiauj@gmail.com">Me contacter</a></li>
                         <?php
-                        if ($this->app->user()->isAuthenticated()) {
+                        if ($this->app->user()->isAuthenticated())
+                        {
                             ?>
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Admin <span class="caret"></span></a>
@@ -64,11 +65,13 @@
                     </ul>
                     <ul class="nav navbar-nav navbar-right hidden-sm">
                         <?php
-                        if ($this->app->user()->getAttribute('pseudo')) {
+                        if ($this->app->user()->getAttribute('pseudo'))
+                        {
                             ?>
                             <li><a href="deconnexion"><button type="button" id="nav_connexion" class="btn btn-default">Deconnexion</button></a></li>
                             <?php
-                        } else {
+                        } else
+                        {
                             ?>
                             <li><a href="connexion" ><button type="button" id="nav_connexion" class="btn btn-default">Connexion</button></a></li>
                             <?php

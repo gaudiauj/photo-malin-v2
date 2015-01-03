@@ -1,5 +1,6 @@
 <?php
-if ($profil) {
+if ($profil)
+{
     ?>
     <div class="container">
         <div class="row">					
@@ -17,10 +18,11 @@ if ($profil) {
                                 echo(' <a href="news-' . $comment['news'] . '#comments-' . $comment['id'] . '"> <span class="glyphicon glyphicon-eye-open" aria-hidden="true"> </a>');
                                 ?>
                                 <?php
-                                if ($user->isAuthenticated()) {
-                                    ?> 
+                                if ($user->isAuthenticated())
+                                {
+                                    ?> -
                                     <a href="admin/comment-update-<?php echo $comment['id']; ?>"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a> <a href="admin/comment-delete-<?php echo $comment['id']; ?>"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
-                                    <?php } ?>
+        <?php } ?>
                             </legend>
                             <p><?php echo (nl2br(htmlspecialchars($comment['contenu']))); ?></p>
                         </fieldset>
@@ -33,6 +35,7 @@ if ($profil) {
         </div>
     </div>
     <?php
-} else {
+} else
+{
     require '_noprofil.php';
 }

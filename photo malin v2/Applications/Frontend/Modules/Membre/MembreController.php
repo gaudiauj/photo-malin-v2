@@ -25,22 +25,29 @@ class MembreController extends \Library\BackController
     {
         $this->page->addVars('noLayout', true);
         $manager = $this->managers->getManagerOf('Membre');
-        if ($request->postExists('pseudo')) {
-            if (!($request->postData('pass_insc') == $request->postData('pass_insc_verif'))) {
+        if ($request->postExists('pseudo'))
+        {
+            if (!($request->postData('pass_insc') == $request->postData('pass_insc_verif')))
+            {
                 $this->page->addVars('matchpass', false);
-            } else {
+            } else
+            {
                 $membre = new \Library\Entities\Membre(array(
                     'pseudo' => $request->postData('pseudo'),
                     'pass' => $request->postData('pass_insc'),
                     'mail' => $request->postData('mail_insc')
                 ));
-                if ($membre->isValid()) {
-                    if ($manager->add($membre)) {
+                if ($membre->isValid())
+                {
+                    if ($manager->add($membre))
+                    {
                         $this->page->addVars('reussite', true);
-                    } else {
+                    } else
+                    {
                         $this->page->addVars('reussite', false);
                     }
-                } else {
+                } else
+                {
                     $this->page->addVars('erreurs', $membre->erreurs());
                 }
             }
@@ -50,16 +57,19 @@ class MembreController extends \Library\BackController
     public function executeConnexion(\Library\HTTPRequest $request)
     {
         $this->page->addVars('title', 'Connexion');
-        if ($request->postExists('pseudo_co') && $request->postData('pass_insc') == $request->postData('pass_insc_verif')) {
+        if ($request->postExists('pseudo_co') && $request->postData('pass_insc') == $request->postData('pass_insc_verif'))
+        {
             $membre = new \Library\Entities\Membre(array(
                 'pseudo' => $request->postData('pseudo_co'),
                 'pass' => $request->postData('pass_co'),
             ));
             $manager = $this->managers->getManagerOf('Membre');
-            if ($manager->verifMembre($membre)) {
+            if ($manager->verifMembre($membre))
+            {
                 $this->app->user()->setAttribute('pseudo', $membre->getPseudo());
                 $connecte = true;
-            } else {
+            } else
+            {
                 $connecte = false;
             }
             $this->page->addVars('connecte', $connecte);
@@ -78,15 +88,17 @@ class MembreController extends \Library\BackController
         $membreManager = $this->managers->getManagerOf('Membre');
         $pseudo = $request->getData('pseudo');
         $this->page->addVars('title', 'profils de ' . $pseudo);
-        $this->page->addVars('pseudo', urldecode($pseudo));
+        $this->page->addVars('pseudo', $pseudo);
         $this->page->addVars('profil', true);
         $membre = new \Library\Entities\Membre(array(
             'pseudo' => $pseudo
         ));
 
-        if ($membreManager->exist($membre)) {
+        if ($membreManager->exist($membre))
+        {
             $this->processComments($request, $pseudo);
-        } else {
+        } else
+        {
             $this->page->addVars('profil', false);
         }
     }
@@ -99,7 +111,8 @@ class MembreController extends \Library\BackController
         $listeComments = $commentsManager->getListMembre($pseudo, 0, $nombrecomm);
         foreach ($listeComments as $Comments)
         {
-            if (strlen($Comments->contenu()) > $nombreCaracteres) {
+            if (strlen($Comments->contenu()) > $nombreCaracteres)
+            {
                 $debut = substr($Comments->contenu(), 0, $nombreCaracteres);
                 $debut = substr($debut, 0, strrpos($debut, ' ')) . '...';
 
@@ -109,4 +122,5 @@ class MembreController extends \Library\BackController
         $this->page->addVars('nombrecomm', $nombrecomm);
         $this->page->addVars('comments', $listeComments);
     }
+
 }

@@ -21,7 +21,8 @@ class Page extends ApplicationComponent
 
     public function addVars($var, $value)
     {
-        if (!is_string($var) || is_numeric($var) || empty($var)) {
+        if (!is_string($var) || is_numeric($var) || empty($var))
+        {
             throw new \InvalidArgumentException('mauvais nom de variable');
         }
 
@@ -30,7 +31,8 @@ class Page extends ApplicationComponent
 
     public function getGeneratedPage()
     {
-        if (!file_exists($this->contentFile)) {
+        if (!file_exists($this->contentFile))
+        {
             throw new \RuntimeException('La vue spécifiée n\'existe pas : ' . $this->contentFile);
         }
         header('content-type: text/html; charset=utf-8');
@@ -41,8 +43,10 @@ class Page extends ApplicationComponent
         ob_start();
         require $this->contentFile;
         $content = ob_get_clean();
-        if (isset($noLayout)) {
-            if ($noLayout) {
+        if (isset($noLayout))
+        {
+            if ($noLayout)
+            {
                 return $content;
             }
         }
@@ -53,7 +57,8 @@ class Page extends ApplicationComponent
 
     public function setContentFile($contentFile)
     {
-        if (!is_string($contentFile) || empty($contentFile)) {
+        if (!is_string($contentFile) || empty($contentFile))
+        {
             throw new \InvalidArgumentException('La vue spécifiée est invalide');
         }
 

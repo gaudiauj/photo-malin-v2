@@ -40,22 +40,28 @@ class Comment extends \Library\Entity
 
     public function setAuteur($auteur)
     {
-        if (!is_string($auteur) || empty($auteur)) {
+        if (!is_string($auteur) || empty($auteur))
+        {
             $this->erreurs[] = self::AUTEUR_INVALIDE;
-        } else if (strlen($auteur) > 20) {
+        } else if (strlen($auteur) > 20)
+        {
             $this->erreurs[] = self::AUTEUR_TROP_LONG;
-        } else {
+        } else
+        {
             $this->auteur = $auteur;
         }
     }
 
     public function setContenu($contenu)
     {
-        if (!is_string($contenu) || empty($contenu)) {
+        if (!is_string($contenu) || empty($contenu))
+        {
             $this->erreurs[] = self::CONTENU_INVALIDE;
-        } else if (strlen($contenu) > 10000) {
+        } else if (strlen($contenu) > 1200)
+        {
             $this->erreurs[] = self::CONTENU_TROP_LONG;
-        } else {
+        } else
+        {
             $this->contenu = $contenu;
         }
     }

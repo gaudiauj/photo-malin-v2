@@ -3,6 +3,4 @@
     <define var="nombre_news" value="5" />
     <define var="nombre_caracteres" value="350" />
     <define var="nombre_comm_profil" value="5"/>
-    <define var="taille_photo" value="2000000"/>
-    
 </definitions>
