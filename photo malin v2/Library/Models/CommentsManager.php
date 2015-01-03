@@ -32,11 +32,9 @@ abstract class CommentsManager extends \Library\Manager
      */
     public function save(Comment $comment)
     {
-        if ($comment->isValid())
-        {
+        if ($comment->isValid()) {
             $comment->isNew() ? $this->add($comment) : $this->update($comment);
-        } else
-        {
+        } else {
             throw new \RuntimeException('Le commentaire doit être validé pour être enregistré');
         }
     }

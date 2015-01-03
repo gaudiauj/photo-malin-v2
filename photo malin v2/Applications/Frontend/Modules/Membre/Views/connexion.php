@@ -3,13 +3,11 @@
         <div class="jumbotron" >
             <h2> CONNEXION : </h2>
             <?php
-            if (isset($connecte) && $connecte)
-            {
+            if (isset($connecte) && $connecte) {
                 ?>
                 <div class="alert alert-success" role="alert">Vous êtes maintenant connecté !</div>
                 <?php
-            } else if (isset($connecte))
-            {
+            } else if (isset($connecte)) {
                 ?>
                 <div class="alert alert-danger" id="message_insc">Mauvais mot de passe ou mauvais pseudo</div>
             <?php }
