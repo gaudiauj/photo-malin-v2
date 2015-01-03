@@ -8,17 +8,19 @@
             <p><?php echo nl2br($news['contenu']); ?></p>
 
             <?php
-            if ($news['dateAjout'] != $news['dateModif']) {
+            if ($news['dateAjout'] != $news['dateModif'])
+            {
                 ?>
                 <p style="text-align: right;"><small><em>Modifiée le <?php echo $news['dateModif']->format('d/m/Y à H\hi'); ?></em></small></p>
-            <?php } ?>
+<?php } ?>
         </div>
     </div>
 </div>
 
 
 <?php
-if ($this->app->user()->getAttribute('pseudo')) {
+if ($this->app->user()->getAttribute('pseudo'))
+{
     ?>
     <div class="row">
         <div class="col-md-12">
@@ -55,7 +57,8 @@ if ($this->app->user()->getAttribute('pseudo')) {
     </div>
     <?php
 }
-else {
+else
+{
     ?>
     <div class="row">
         <div class="col-md-12">
@@ -64,14 +67,15 @@ else {
             </div>
         </div>
     </div>
-    <?php
-}
-?>
+                <?php
+            }
+            ?>
 <div class="row">
     <div class="col-md-12">
         <div class="news">
             <?php
-            if (empty($comments)) {
+            if (empty($comments))
+            {
                 ?>
                 <p>Aucun commentaire n'a encore été posté. Soyez le premier à en laisser un !</p>
                 <?php
@@ -84,19 +88,20 @@ else {
                     <fieldset>
                         <legend>
                             Posté par <a href=<?php echo('"/jeantest/web/profil-' . $comment['auteur'] . '"'); ?>><strong><?php echo htmlspecialchars($comment['auteur']); ?></strong></a> le <?php echo $comment['date']->format('d/m/Y à H\hi'); ?>
-                            <?php
-                            if ($user->isAuthenticated()) {
-                                ?> 
+    <?php
+    if ($user->isAuthenticated())
+    {
+        ?> -
                                 <a href="admin/comment-update-<?php echo $comment['id']; ?>"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a> <a href="admin/comment-delete-<?php echo $comment['id']; ?>"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
-                                <?php } ?>
+                <?php } ?>
                         </legend>
                         <p><?php echo (nl2br(htmlspecialchars($comment['contenu']))); ?></p>
                     </fieldset>
                 </div>
 
-                <?php
-            }
-            ?>
+    <?php
+}
+?>
         </div>
     </div>
 </div>

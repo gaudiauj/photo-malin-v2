@@ -71,7 +71,8 @@ abstract class Application
         {
             $vars = array();
             // On regarde si des variables sont présentes dans l'URL.
-            if ($route->hasAttribute('vars')) {
+            if ($route->hasAttribute('vars'))
+            {
                 $vars = explode(',', $route->getAttribute('vars'));
             }
             // On ajoute la route au routeur.
@@ -83,7 +84,8 @@ abstract class Application
             $matchedRoute = $router->getRoute($this->httpRequest->requestURI());
         } catch (\RuntimeException $e)
         {
-            if ($e->getCode() == \Library\Router::NO_ROUTE) {
+            if ($e->getCode() == \Library\Router::NO_ROUTE)
+            {
                 // Si aucune route ne correspond, c'est que la page demandée n'existe pas.
                 $this->httpResponse->redirect404();
             }

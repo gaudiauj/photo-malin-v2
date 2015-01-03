@@ -20,12 +20,14 @@
     </div>
 
     <?php
-    if (isset($news) && !$news->isNew()) {
+    if (isset($news) && !$news->isNew())
+    {
         ?>
         <input type="hidden" name="id" value="<?php echo $news['id']; ?>" />
         <input type="submit" value="Modifier" name="modifier" />
         <?php
-    } else {
+    } else
+    {
         ?>
         <input type="submit" value="Ajouter" />
         <?php

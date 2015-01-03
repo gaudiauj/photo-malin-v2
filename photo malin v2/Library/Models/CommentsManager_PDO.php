@@ -33,7 +33,8 @@ class CommentsManager_PDO extends CommentsManager
 
     public function getListOf($news)
     {
-        if (!ctype_digit($news)) {
+        if (!ctype_digit($news))
+        {
             throw new \InvalidArgumentException('L\'identifiant de la news passé doit être un nombre entier valide');
         }
 
@@ -106,7 +107,8 @@ class CommentsManager_PDO extends CommentsManager
     {
         $sql = 'SELECT * FROM comments ORDER BY id DESC';
 
-        if ($debut != -1 || $limite != -1) {
+        if ($debut != -1 || $limite != -1)
+        {
             $sql .= ' LIMIT ' . (int) $limite . ' OFFSET ' . (int) $debut;
         }
 
@@ -134,7 +136,8 @@ class CommentsManager_PDO extends CommentsManager
     {
         $sql = 'SELECT * FROM comments WHERE auteur = :pseudo ORDER BY id DESC ';
 
-        if ($debut != -1 || $limite != -1) {
+        if ($debut != -1 || $limite != -1)
+        {
             $sql .= ' LIMIT ' . (int) $limite . ' OFFSET ' . (int) $debut;
         }
 

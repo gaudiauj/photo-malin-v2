@@ -31,7 +31,8 @@ class NewsController extends \Library\BackController
 
         foreach ($listeNews as $news)
         {
-            if (strlen($news->contenu()) > $nombreCaracteres) {
+            if (strlen($news->contenu()) > $nombreCaracteres)
+            {
                 $debut = substr($news->contenu(), 0, $nombreCaracteres);
                 $debut = substr($debut, 0, strrpos($debut, ' ')) . '...';
 
@@ -47,24 +48,28 @@ class NewsController extends \Library\BackController
     {
         $news = $this->managers->getManagerOf('News')->getUnique($request->getData('id'));
 
-        if (empty($news)) {
+        if (empty($news))
+        {
             $this->app->httpResponse()->redirect404();
         }
 
         $this->page->addVars('title', $news->titre());
         $this->page->addVars('news', $news);
         $this->page->addVars('comments', $this->managers->getManagerOf('Comments')->getListOf($news->id()));
-        if ($request->postExists('pseudo') && $request->postData('pseudo') == $this->app->user()->getAttribute('pseudo')) {
+        if ($request->postExists('pseudo') && $request->postData('pseudo') == $this->app->user()->getAttribute('pseudo'))
+        {
             $comment = new \Library\Entities\Comment(array(
                 'news' => $request->getData('id'),
                 'auteur' => $request->postData('pseudo'),
                 'contenu' => $request->postData('contenu')
             ));
 
-            if ($comment->isValid()) {
+            if ($comment->isValid())
+            {
                 $this->managers->getManagerOf('Comments')->save($comment);
                 $this->app->httpResponse()->redirect('news-' . $request->getData('id'));
-            } else {
+            } else
+            {
                 $this->page->addVars('erreurs', $comment->erreurs());
             }
 
@@ -75,7 +80,8 @@ class NewsController extends \Library\BackController
     public function executeIndex(\Library\HTTPRequest $request)
     {
         $news = $this->managers->getManagerOf('News')->getLast();
-        if (empty($news)) {
+        if (empty($news))
+        {
             $this->app->httpResponse()->redirect404();
         }
         $this->page->addVars('title', $news->titre());
