@@ -23,8 +23,7 @@ class NewsController extends \Library\BackController
         $page = $request->getData('page');
         $nombreNews = $this->app->config()->get('nombre_news');
         $nombrePage = (int) ceil($manager->count() / $nombreNews);
-        if ($page > 0 && $page <= $nombrePage)
-        {
+        if ($page > 0 && $page <= $nombrePage) {
             $listeNews = $manager->getList(($page - 1) * $nombreNews, $page * $nombreNews);
 
             $this->page->addVars('nombrepage', $nombrePage);
@@ -32,16 +31,14 @@ class NewsController extends \Library\BackController
             $this->page->addVars('listeNews', $listeNews);
             $this->page->addVars('nombreNews', $manager->count());
             $this->page->addVars('url', 'news');
-        } else
-        {
+        } else {
             $this->app->httpResponse()->redirect404();
         }
     }
 
     public function executeInsert(\Library\HTTPRequest $request)
     {
-        if ($request->postExists('auteur'))
-        {
+        if ($request->postExists('auteur')) {
             $this->processForm($request);
         }
         $this->page->addVars('title', 'Ajout d\'une news');
@@ -58,18 +55,15 @@ class NewsController extends \Library\BackController
         );
 
         // L'identifiant de la news est transmis si on veut la modifier.
-        if ($request->postExists('id'))
-        {
+        if ($request->postExists('id')) {
             $news->setId($request->postData('id'));
         }
 
-        if ($news->isValid())
-        {
+        if ($news->isValid()) {
             $this->managers->getManagerOf('News')->save($news);
 
             $this->app->user()->setFlash($news->isNew() ? 'La news a bien été ajoutée !' : 'La news a bien été modifiée !');
-        } else
-        {
+        } else {
             $this->page->addVars('erreurs', $news->erreurs());
         }
 
@@ -87,11 +81,9 @@ class NewsController extends \Library\BackController
 
     public function executeUpdate(\Library\HTTPRequest $request)
     {
-        if ($request->postExists('auteur'))
-        {
+        if ($request->postExists('auteur')) {
             $this->processForm($request);
-        } else
-        {
+        } else {
             $this->page->addVars('news', $this->managers->getManagerOf('News')->getUnique($request->getData('id')));
         }
 
@@ -102,29 +94,25 @@ class NewsController extends \Library\BackController
     {
         $this->page->addVars('title', 'Modification d\'un commentaire');
 
-        if ($request->postExists('pseudo'))
-        {
+        if ($request->postExists('pseudo')) {
             $comment = new \Library\Entities\Comment(array(
                 'id' => $request->getData('id'),
                 'auteur' => $request->postData('pseudo'),
                 'contenu' => $request->postData('contenu')
             ));
 
-            if ($comment->isValid())
-            {
+            if ($comment->isValid()) {
                 $this->managers->getManagerOf('Comments')->save($comment);
 
                 $this->app->user()->setFlash('Le commentaire a bien été modifié !');
 
                 $this->app->httpResponse()->redirect('/news-page-' . $request->postData('news'));
-            } else
-            {
+            } else {
                 $this->page->addVars('erreurs', $comment->erreurs());
             }
 
             $this->page->addVars('comment', $comment);
-        } else
-        {
+        } else {
             $this->page->addVars('comment', $this->managers->getManagerOf('Comments')->get($request->getData('id')));
         }
     }
@@ -136,16 +124,14 @@ class NewsController extends \Library\BackController
         $nombreComments = $this->app->config()->get('nombre_comments');
         $manager = $this->managers->getManagerOf('Comments');
         $nombrePage = (int) ceil(($manager->count() / $nombreComments));
-        if ($page > 0 && $page <= $nombrePage)
-        {
+        if ($page > 0 && $page <= $nombrePage) {
             $listeComments = $manager->getList(($page - 1) * $nombreComments, $page * $nombreComments);
             $this->processContenuComments($request, $listeComments);
             $this->page->addVars('page', $page);
             $this->page->addVars('nombrepage', $nombrePage);
             $this->page->addVars('nombreComments', $manager->count());
             $this->page->addVars('url', 'comment-list');
-        } else
-        {
+        } else {
             $this->app->httpResponse()->redirect404();
         }
     }
@@ -165,8 +151,7 @@ class NewsController extends \Library\BackController
 
         foreach ($listeComments as $Comments)
         {
-            if (strlen($Comments->contenu()) > $nombreCaracteres)
-            {
+            if (strlen($Comments->contenu()) > $nombreCaracteres) {
                 $debut = substr($Comments->contenu(), 0, $nombreCaracteres);
                 $debut = substr($debut, 0, strrpos($debut, ' ')) . '...';
 

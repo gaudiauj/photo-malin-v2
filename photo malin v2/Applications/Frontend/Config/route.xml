@@ -17,5 +17,7 @@ and open the template in the editor.
     <route url="/jeantest/web/inscription" module="Membre" action="afficheinscrire" />
     <route url="/jeantest/web/connexion" module="Membre" action="connexion" /> 
     <route url="/jeantest/web/deconnexion" module="Membre" action="deconnexion" />
-    <route url="/jeantest/web/profil-([\w]+)" module="Membre" action="profil" vars="pseudo"/>
+    <route url="/jeantest/web/profil-([\w?%]+)" module="Membre" action="profil" vars="pseudo"/>
+    <route url="/jeantest/web/ajoutphoto" module="Photo" action="ajoutphoto" />
+    <route url="/jeantest/web/ajout" module="Photo" action="ajout" />
 </routes>

@@ -36,31 +36,24 @@ class Membre extends \Library\Entity
     // SETTERS
     public function setPseudo($pseudo)
     {
-        if (!is_string($pseudo) || empty($pseudo))
-        {
+        if (!is_string($pseudo) || empty($pseudo)) {
             $this->erreurs[] = self::PSEUDO_INVALIDE;
-        } else if (strlen($pseudo) > 20)
-        {
+        } else if (strlen($pseudo) > 20) {
             $this->erreurs[] = self::PSEUDO_TROP_LONG;
-        } else if (!preg_match("#^[\w \-]+$#", $pseudo))
-        {
+        } else if (!preg_match("#^[\w \-]+$#", $pseudo)) {
             $this->erreurs[] = self::PSEUDO_CARACTERE_SPECIAUX;
-        } else
-        {
+        } else {
             $this->pseudo = $pseudo;
         }
     }
 
     public function setPass($pass)
     {
-        if (!is_string($pass) || empty($pass))
-        {
+        if (!is_string($pass) || empty($pass)) {
             $this->erreurs[] = self::MDP_INVALIDE;
-        } else if (strlen($pass) < 6)
-        {
+        } else if (strlen($pass) < 6) {
             $this->erreurs[] = self::MDP_TROP_COURT;
-        } else
-        {
+        } else {
             $pass = sha1($pass);
             $this->pass = $pass;
         }
@@ -68,11 +61,9 @@ class Membre extends \Library\Entity
 
     public function setMail($mail)
     {
-        if (!is_string($mail) || empty($mail) || !preg_match("#^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$#", $mail))
-        {
+        if (!is_string($mail) || empty($mail) || !preg_match("#^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$#", $mail)) {
             $this->erreurs[] = self::MAIL_INVALIDE;
-        } else
-        {
+        } else {
             $this->mail = $mail;
         }
     }

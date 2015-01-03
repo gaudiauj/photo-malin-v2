@@ -6,19 +6,13 @@
  * and open the template in the editor.
  */
 $message = array();
-if (isset($reussite) && $reussite)
-{
+if (isset($reussite) && $reussite) {
     $message['reussi'] = ("compte créé");
-} else
-{
+} else {
     if (isset($matchpass))
-    {
         $message['nomatch'] = ("erreur les mots de passe ne correspondent pas");
-    }
     if (isset($reussite) && !$reussite)
-    {
         $message['existe'] = ("erreur le pseudo ou le mail existe déja");
-    }
     if (isset($erreurs) && in_array(\Library\Entities\Membre::PSEUDO_INVALIDE, $erreurs))
         $message['PSEUDO_INVALIDE'] = 'Le pseudo est invalide.<br />';
     if (isset($erreurs) && in_array(\Library\Entities\Membre::PSEUDO_TROP_LONG, $erreurs))
