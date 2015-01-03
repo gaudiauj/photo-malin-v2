@@ -30,14 +30,14 @@ class PhotoController extends \Library\BackController
         $this->page->addVars('title', 'ajout photos');
         if ($request->postExists('titre')) {
             $this->page->addVars('noLayout', true);
-            $files = $request->postFiles();
-            $ajoutphoto = new PhotoClass($request->postDataArray(), $files);
+            $files = $request->postFiles();            
+            $ajoutphoto = new PhotoClass($request->postDataArray(), $files,$this->app->config()->get('chemin_photo'));
             $tailleMax = $this->app->config()->get('taille_photo');
             if ($files['fichier']['error'] > 1) {
                 $reponse = ($files['fichier']['error']);
             } else {
                 if ($files['fichier']['size'] <= $tailleMax AND $files['fichier']['error'] == 0) {
-                    $photo = $ajoutphoto->ajoutphoto();
+                    $photo = $ajoutphoto->ajoutphoto($this->app->config()->get('chemin_miniature'));
                     $this->managers->getManagerOf('Photo')->add($photo);
                     $reponse = $photo->erreurs();
                 } else {

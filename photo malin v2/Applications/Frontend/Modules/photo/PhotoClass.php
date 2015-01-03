@@ -23,14 +23,19 @@ class PhotoClass
     private $files;
     private $extension_upload;
 
-    public function __construct($array, $files)
+    public function __construct($array, $files,$source)
     {
         $this->photo = new photo($array);
         $this->files = $files;
         $this->setExtensionupload();
-        $this->setsource();
+        $this->setsource($source);
     }
 
+    /**
+     * ajoute les données exif si elles existent à une photo 
+     * @param null
+     * @return null
+     */
     public function exif()
     {
         $exif = exif_read_data($this->files['fichier']['tmp_name'], 'EXIF', true);
@@ -66,6 +71,12 @@ class PhotoClass
         $this->photo->setExtension($this->extension_upload);
     }
 
+    /**
+     * Retourne un identifiant d'image représentant une image obtenue
+     * à partir du fichier source
+     * @param null
+     * @return null
+     */
     public function creerImagesource()
     {
         $imageCreateFrom = array(
@@ -85,6 +96,23 @@ class PhotoClass
         return $image_source;
     }
 
+    /**
+     * Créer un fichier JPEG / PNG depuis l'image fournie
+     * 
+     * @param $image Une ressource d'image, retournée par 
+     * une des fonctions de création d'images
+     * 
+     * @param $destination Le chemin d'enregistrement du fichier. 
+     * S'il n'est pas défini ou vaut NULL, le flux d'image brute 
+     * sera affiché directement.
+     * 
+     * @param $quality Quality est optionnel, et prend des valeurs
+     * entières de 0 (pire qualité, petit fichier) et 
+     * 100 (meilleure qualité, gros fichier). 
+     * Par défaut, la valeur est 50
+     * 
+     * @return null
+     * */
     function creerImage($image, $destination, $quality = 50)
     {
         $imageCreate = array(
@@ -108,6 +136,20 @@ class PhotoClass
         imagedestroy($image);
     }
 
+    /**
+     * Redimensionne une image
+     * 
+     * @param $destination Chemin de destination de l'image 
+     * redimensionnée
+     * 
+     * @param $width Width de l'image redimensionnée (largeur)
+     * 
+     * @param $height Height de l'image redimensionnée (hauteur)
+     * 
+     * @param $quality Quality de l'image redimensionnée (compression) 
+     * si jpeg
+     * @return null
+     */
     function redimensionneImage($destination, $width, $height)
     {
         $image_source = $this->creerImagesource();
@@ -131,28 +173,38 @@ class PhotoClass
         $this->creerImage($image_redim, $destination);
     }
 
-    public function enregistrePhoto()
+    /**
+     * enregistre une photo sur le serveur ainsi qu'une miniature
+     * 
+     * @return null
+     */
+    public function enregistrePhoto($chemin_miniature)
     {
         $extension = $this->photo->getExtension();
-        $chemin_miniature = "./img/img_utilisateur/miniature/";
         $nom_miniature = $chemin_miniature . $this->photo->getNom_photo() . '.' . $extension;
         $resultat = move_uploaded_file($this->files['fichier']['tmp_name'], $this->source);
         $this->redimensionneImage($nom_miniature, 250, -1);
     }
-
-    public function ajoutphoto()
+    
+    
+     /**
+     * execute exif et enregistrePhoto
+     * 
+     * @return null
+     */
+    public function ajoutphoto($chemin_miniature)
     {
         $this->exif();
         if ($this->photo->isValid()) {
-            $this->enregistrePhoto();
+            $this->enregistrePhoto($chemin_miniature);
         }
         return $this->photo;
     }
 
     //setter//
-    public function setSource()
+    public function setSource($source)
     {
-        $this->source = "./img/img_utilisateur/taille_normal/" . $this->photo->getNom_photo() . '.' . $this->extension_upload;
+        $this->source =$source . $this->photo->getNom_photo() . '.' . $this->extension_upload;
     }
 
     public function setExtensionupload()
