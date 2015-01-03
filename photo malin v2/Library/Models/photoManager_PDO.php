@@ -7,6 +7,7 @@
  */
 
 namespace Library\Models;
+
 use \Library\Entities\Photo;
 
 /**
@@ -19,20 +20,22 @@ class photoManager_PDO extends photoManager
 
     public function add(Photo $photo)
     {
-        $requete = $this->dao->prepare('INSERT INTO photo(auteur,nom_photo,titre,commentaire,extension,privee,appareil_photo,date_ajout,focale,iso,vit_obt,date_prise_photo) VALUES(:auteur,:nom_photo,:titre,:commentaire,:extension,:privee,:appareil_photo,now(),:focale,:iso,:vit_obt,:date_prise_photo)');
-        $requete->execute(array(
-            'auteur' => strtolower($photo->getauteur()),
-            'nom_photo' => $photo->getnom_photo(),
-            'titre' => $photo->gettitre(),
-            'commentaire' => $photo->getcommentaire(),
-            'extension' => $photo->getextension(),
-            'privee' => $photo->getprivee(),
-            'appareil_photo' => $photo->getappareil_photo(),
-            'focale' => $photo->getfocale(),
-            'iso' => $photo->getiso(),
-            'vit_obt' => $photo->getvit_obt(),
-            'date_prise_photo' => $photo->getdate_prise_photo()
-        ));
+        if ($photo->isValid()) {
+            $requete = $this->dao->prepare('INSERT INTO photo(auteur,nom_photo,titre,commentaire,extension,privee,appareil_photo,date_ajout,focale,iso,vit_obt,date_prise_photo) VALUES(:auteur,:nom_photo,:titre,:commentaire,:extension,:privee,:appareil_photo,now(),:focale,:iso,:vit_obt,:date_prise_photo)');
+            $requete->execute(array(
+                'auteur' => strtolower($photo->getauteur()),
+                'nom_photo' => $photo->getnom_photo(),
+                'titre' => $photo->gettitre(),
+                'commentaire' => $photo->getcommentaire(),
+                'extension' => $photo->getextension(),
+                'privee' => $photo->getprivee(),
+                'appareil_photo' => $photo->getappareil_photo(),
+                'focale' => $photo->getfocale(),
+                'iso' => $photo->getiso(),
+                'vit_obt' => $photo->getvit_obt(),
+                'date_prise_photo' => $photo->getdate_prise_photo()
+            ));
+        }
     }
 
     public function delete(Photo $photo)
