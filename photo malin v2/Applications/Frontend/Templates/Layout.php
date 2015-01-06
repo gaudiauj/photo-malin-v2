@@ -35,14 +35,16 @@
                 </div>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                        <li class=" hidden-md hidden-sm"><a href="http://localhost/jeantest/web/">Accueil</a></li>
-                        <li class=""><a href="http://localhost/jeantest/web/inscription">S'inscrire</a></li>
-                        <li class=""><a href="chat.php?page=chat">Chat</a></li>
-                        <li class="" ><a href="photo.php?page=photos">photos</a></li>
+                        <li class=" hidden-md hidden-sm"><a href="http://localhost/jeantest/web/">Accueil</a></li>                       
+                        <li><a href="http://localhost/jeantest/web/photo">photos</a></li>
+                        <?php
+                        if ($this->app->user()->getAttribute('pseudo')) {
+                            ?>
+                            <li><a href="http://localhost/jeantest/web/ajoutphoto">envoi photo</button></a></li>
+                        <?php } ?>
                         <li><a href="mailto:gaudiauj@gmail.com">Me contacter</a></li>
                         <?php
-                        if ($this->app->user()->isAuthenticated())
-                        {
+                        if ($this->app->user()->isAuthenticated()) {
                             ?>
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Admin <span class="caret"></span></a>
@@ -65,15 +67,20 @@
                     </ul>
                     <ul class="nav navbar-nav navbar-right hidden-sm">
                         <?php
-                        if ($this->app->user()->getAttribute('pseudo'))
-                        {
+                        if ($this->app->user()->getAttribute('pseudo')) {
                             ?>
-                            <li><a href="deconnexion"><button type="button" id="nav_connexion" class="btn btn-default">Deconnexion</button></a></li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">mon profil<span class="caret"></span></a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a href=<?php echo('"http://localhost/jeantest/web/profil-' . $this->app->user()->getAttribute('pseudo') . '"'); ?>>voir mon profil</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="deconnexion"><button type="button" id="nav_deconnexion" class="bouton_nav btn btn-default">Deconnexion</button></a></li>
                             <?php
-                        } else
-                        {
+                        } else {
                             ?>
-                            <li><a href="connexion" ><button type="button" id="nav_connexion" class="btn btn-default">Connexion</button></a></li>
+                            <li><a href="http://localhost/jeantest/web/inscription"><button type="button" id="nav_inscription" class="bouton_nav btn btn-default">s'inscrire</button></a></li>
+                            <li><a href="connexion" ><button type="button" id="nav_connexion" class="bouton_nav btn btn-default">Connexion</button></a></li>                          
                             <?php
                         }
                         ?>

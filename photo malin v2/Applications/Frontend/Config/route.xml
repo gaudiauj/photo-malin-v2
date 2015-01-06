@@ -8,14 +8,18 @@ and open the template in the editor.
 
 <routes>
     <route url="/jeantest/web/commenter-([0-9]+)" module="News" action="insertComment" vars="news" />
-    <route url="/jeantest/web/index.php\?page=accueil" module="News" action="index" /> 
-    <route url="/jeantest/web/index.php" module="News" action="index" /> 
-    <route url="/jeantest/web/" module="News" action="index" /> 
+    <route url="/jeantest/web/index.php\?page=accueil" module="News" action="accueil" /> 
+    <route url="/jeantest/web/index.php" module="News" action="accueil" /> 
+    <route url="/jeantest/web/" module="News" action="accueil" /> 
     <route url="/jeantest/web/news" module="News" action="news" /> 
     <route url="/jeantest/web/news-([0-9]+)" module="News" action="show" vars="id"/>
     <route url="/jeantest/web/inscription-back" module="Membre" action="inscription" /> 
     <route url="/jeantest/web/inscription" module="Membre" action="afficheinscrire" />
     <route url="/jeantest/web/connexion" module="Membre" action="connexion" /> 
     <route url="/jeantest/web/deconnexion" module="Membre" action="deconnexion" />
-    <route url="/jeantest/web/profil-([\w]+)" module="Membre" action="profil" vars="pseudo"/>
+    <route url="/jeantest/web/profil-([\w?%]+)" module="Membre" action="profil" vars="pseudo"/>
+    <route url="/jeantest/web/ajoutphoto" module="Photo" action="ajoutphoto" />
+    <route url="/jeantest/web/ajout" module="Photo" action="ajout" />
+    <route url="/jeantest/web/photo" module="Photo" action="AffichePublic" />
+    <route url="/jeantest/web/affNews" module="News" action="AfficheNews" /> 
 </routes>

@@ -29,11 +29,11 @@ class photoManager_PDO extends photoManager
                 'commentaire' => $photo->getcommentaire(),
                 'extension' => $photo->getextension(),
                 'privee' => $photo->getprivee(),
-                'appareil_photo' => $photo->getappareil_photo(),
-                'focale' => $photo->getfocale(),
-                'iso' => $photo->getiso(),
-                'vit_obt' => $photo->getvit_obt(),
-                'date_prise_photo' => $photo->getdate_prise_photo()
+                'appareil_photo' => $photo->getExif()->getappareil_photo(),
+                'focale' => $photo->getExif()->getfocale(),
+                'iso' => $photo->getExif()->getiso(),
+                'vit_obt' => $photo->getExif()->getvit_obt(),
+                'date_prise_photo' => $photo->getExif()->getdate_prise_photo()
             ));
         }
     }
@@ -52,6 +52,28 @@ class photoManager_PDO extends photoManager
         ));
         $reponse = $requete->fetch();
         return $reponse;
+    }
+
+    public function searchPublic($nomRecherche = "", $debut = -1, $limite = -1, $typeDeTrie = self::DECROISSANT)
+    {
+        $sql = 'SELECT * FROM photo WHERE privee="public" AND commentaire LIKE "%' . $nomRecherche . '%" OR titre LIKE "%' . $nomRecherche . '%" OR auteur LIKE "%' . $nomRecherche . '%" ORDER BY id ' . $typeDeTrie;
+        if ($debut != -1 || $limite != -1) {
+            $sql .= ' LIMIT ' . (int) $limite . ' OFFSET ' . (int) $debut;
+        }
+        $requete = $this->dao->query($sql);
+        $requete->setFetchMode(\PDO::FETCH_ASSOC);
+        $arrayphoto = $requete->fetchAll();
+        foreach ($arrayphoto as $array) {
+            $array['iso']= (int) $array['iso'];
+            $photos[] = new \Library\Entities\photo($array);
+        }
+        
+        foreach ($photos as $photo) {
+            $photo->getExif()->setDate_prise_photo(new \DateTime($photo->getExif()->getDate_prise_photo()));
+        }
+        $requete->closeCursor();
+
+        return $photos;
     }
 
 }

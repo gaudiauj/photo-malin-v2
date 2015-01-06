@@ -36,4 +36,16 @@ abstract class photoManager extends \Library\Manager
      * @return photo photo demander
      */
     abstract public function get($id);
+    
+    
+    /**
+     * Méthode retournant une liste de photo demandée
+     * @param $nomRecherche mot a rechercher dans titre, commentaire, et auteur
+     * @param $debut int La première news à sélectionner
+     * @param $limite int Le nombre de news à sélectionner
+     * @param $typeDeTrie string type de trie croissant ou decroissant
+     * @return array La liste des photos. Chaque entrée est une instance de photo.
+     */
+    abstract public function searchPublic($nomRecherche,$debut = -1, $limite = -1, $typeDeTrie = self::DECROISSANT);
+    
 }
