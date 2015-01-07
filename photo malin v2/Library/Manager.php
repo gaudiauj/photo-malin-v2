@@ -17,6 +17,9 @@ abstract class Manager
 {
 
     protected $dao;
+    
+    const CROISSANT='ASC';
+    const DECROISSANT='DESC';
 
     public function __construct($dao)
     {

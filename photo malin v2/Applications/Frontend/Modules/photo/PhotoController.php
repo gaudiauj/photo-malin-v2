@@ -30,8 +30,8 @@ class PhotoController extends \Library\BackController
         $this->page->addVars('title', 'ajout photos');
         if ($request->postExists('titre')) {
             $this->page->addVars('noLayout', true);
-            $files = $request->postFiles();            
-            $ajoutphoto = new PhotoClass($request->postDataArray(), $files,$this->app->config()->get('chemin_photo'));
+            $files = $request->postFiles();
+            $ajoutphoto = new PhotoClass($request->postDataArray(), $files, $this->app->config()->get('chemin_photo'));
             $tailleMax = $this->app->config()->get('taille_photo');
             if ($files['fichier']['error'] > 1) {
                 $reponse = ($files['fichier']['error']);
@@ -48,6 +48,18 @@ class PhotoController extends \Library\BackController
         } else {
             $this->app->httpResponse()->redirect($request->previousURL());
         }
+    }
+
+    public function executeAffichePublic(\Library\HTTPRequest $request)
+    {
+        $this->page->addVars('title', 'photos public');
+        $photos = $this->managers->getManagerOf('photo')->searchpublic();        
+        $this->page->addVars('photos', $photos);
+    }
+
+    public function executephotoPublic(\Library\HTTPRequest $request)
+    {
+        $this->page->addVars('title', 'photos public');
     }
 
 }

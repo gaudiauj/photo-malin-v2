@@ -142,7 +142,6 @@ $(function () {
         // on attend que l'image se charge et on l'affiche a la taille de l'ecran
         $('#img_aff').load(function ()
         {
-
             $(this).css('display', 'inline');
             $('#chargement').css('display', 'none');
 

@@ -49,22 +49,22 @@ class PhotoClass
                     }
                 }
                 if (isset($exif_tab['Model'])) {
-                    $this->photo->setAppareil_photo($exif_tab['Model']);
+                    $this->photo->getExif()->setAppareil_photo($exif_tab['Model']);
                 }
                 //iso
                 if (isset($exif_tab['ISOSpeedRatings'])) {
-                    $this->photo->setIso($exif_tab['ISOSpeedRatings']);
+                    $this->photo->getExif()->setIso($exif_tab['ISOSpeedRatings']);
                 }
                 //date de prise de la photo
                 if (isset($exif_tab['DateTimeOriginal'])) {
-                    $this->photo->setDate_prise_photo($exif_tab['DateTimeOriginal']);
+                    $this->photo->getExif()->setDate_prise_photo($exif_tab['DateTimeOriginal']);
                 }
                 // Vitesse d'obturation
                 if (isset($exif_tab['ExposureTime'])) {
-                    $this->photo->setVit_obt($exif_tab['ExposureTime']);
+                    $this->photo->getExif()->setVit_obt($exif_tab['ExposureTime']);
                 }
                 if (isset($exif_tab['FocalLength'])) {
-                    $this->photo->setFocale($exif_tab['FocalLength']);
+                    $this->photo->getExif()->setFocale($exif_tab['FocalLength']);
                 }
             }
         }
@@ -184,9 +184,7 @@ class PhotoClass
         $nom_miniature = $chemin_miniature . $this->photo->getNom_photo() . '.' . $extension;
         $resultat = move_uploaded_file($this->files['fichier']['tmp_name'], $this->source);
         $this->redimensionneImage($nom_miniature, 250, -1);
-    }
-    
-    
+    }   
      /**
      * execute exif et enregistrePhoto
      * 

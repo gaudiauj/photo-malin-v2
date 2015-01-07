@@ -1,5 +1,5 @@
 body { padding-top: 70px; }
-#nav_connexion
+.bouton_nav
 {
     position: relative;
     top: -5px;
@@ -22,6 +22,31 @@ body { padding-top: 70px; }
 .jumbotron h1,
 .jumbotron .h1 {
     font-size: 36px;
+}
+#background
+{
+    background-repeat:no-repeat;
+    background-position: center;
+    margin-top: -10px;
+     -webkit-background-size: cover; /* pour anciens Chrome et Safari */
+  background-size: cover; /* version standardisée */
+  z-index: -1;
+  min-height: 768px;
+  min-width:1024px;
+ -moz-transition-property:  opacity;
+-moz-transition-duration: 500ms;
+}
+.fond
+{
+    background-color: black;
+    position: fixed;
+    height:100%;
+    width: 100%;
+}
+.text-acceuil
+{
+    font-weight: bold;
+    color: white;
 }
 .news
 {

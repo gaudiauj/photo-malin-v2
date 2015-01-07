@@ -188,7 +188,7 @@ $(function () {
 
 
     function ajax() {
-        $.post('gestion/aff_photo_test.php', {nom_triage: $("select[name='nom_triage'] > option:selected").val(), nom_recherche: $("select[name='nom_recherche'] > option:selected").val(), trier: $("select[name='trier'] > option:selected").val(), recherche: $("#recherche").val(), plus_photo: plusphoto, photo_ligne: nb_photo_ligne, privee: 'publique'}, function (data) {
+        $.post('photoPublic', {nom_triage: $("select[name='nom_triage'] > option:selected").val(), nom_recherche: $("select[name='nom_recherche'] > option:selected").val(), trier: $("select[name='trier'] > option:selected").val(), recherche: $("#recherche").val(), plus_photo: plusphoto, photo_ligne: nb_photo_ligne, privee: 'publique'}, function (data) {
             $('#aff_photo').html(data);
             if (!($('#invisible').html() === undefined))
             {
