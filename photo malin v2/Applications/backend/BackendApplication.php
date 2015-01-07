@@ -16,6 +16,7 @@ namespace Applications\Backend;
 class BackendApplication extends \Library\Application
 {
 
+
     public function __construct()
     {
         parent::__construct();
@@ -24,11 +25,9 @@ class BackendApplication extends \Library\Application
 
     public function run()
     {
-        if ($this->user->isAuthenticated())
-        {
+        if ($this->user->isAuthenticated()) {
             $controller = $this->getController();
-        } else
-        {
+        } else {
             $controller = new Modules\Connexion\ConnexionController($this, 'Connexion', 'index');
         }
         $controller->execute();

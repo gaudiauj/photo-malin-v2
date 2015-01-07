@@ -10,7 +10,7 @@ namespace Library;
 
 /**
  * Description of Manager
- *
+ * base de manager
  * @author jeang
  */
 abstract class Manager

@@ -10,7 +10,7 @@ namespace Library;
 
 /**
  * Description of Router
- *
+ * Router de l'application
  * @author jeang
  */
 class Router
@@ -20,7 +20,10 @@ class Router
 
     const NO_ROUTE = 1;
 
-    //ajoute une route 
+    /**
+     * ajoute une route
+     * @param Route $route
+     */
     public function addRoute(Route $route)
     {
         if (!in_array($route, $this->routes))
@@ -29,7 +32,11 @@ class Router
         }
     }
 
-    // recupere toutes les routes 
+    /**
+     * recupere toutes les routes
+     * @param $url
+     * @return mixed
+     */
     public function getRoute($url)
     {
         foreach ($this->routes as $route)

@@ -18,6 +18,11 @@ class Config extends ApplicationComponent
 
     protected $vars = array();
 
+    /**
+     * récupere la valeur de la variable inscrit dans config.xml
+     * @param $var
+     * @return null
+     */
     public function get($var)
     {
         if (!$this->vars)

@@ -16,6 +16,11 @@ class BackController extends ApplicationComponent
     protected $view;
     protected $managers;
 
+    /**
+     * @param Application $app
+     * @param $module
+     * @param $action
+     */
     public function __construct(Application $app, $module, $action)
     {
         parent::__construct($app);
@@ -26,6 +31,9 @@ class BackController extends ApplicationComponent
         $this->managers = new Managers('PDO', PDOFactory::getMysqlConnexionPDO());
     }
 
+    /**
+     *
+     */
     public function execute()
     {
         $methode = 'execute' . ucfirst($this->action);
@@ -36,11 +44,17 @@ class BackController extends ApplicationComponent
         $this->$methode($this->app->httpRequest());
     }
 
+    /**
+     * @return page
+     */
     public function page()
     {
         return $this->page;
     }
 
+    /**
+     * @param $module
+     */
     public function setModule($module)
     {
         if (!is_string($module) || empty($module))
@@ -51,6 +65,9 @@ class BackController extends ApplicationComponent
         $this->module = $module;
     }
 
+    /**
+     * @param $action
+     */
     public function setAction($action)
     {
         if (!is_string($action) || empty($action))
@@ -61,6 +78,9 @@ class BackController extends ApplicationComponent
         $this->action = $action;
     }
 
+    /**
+     * @param $view
+     */
     public function setView($view)
     {
         if (!is_string($view) || empty($view))

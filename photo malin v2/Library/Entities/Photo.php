@@ -13,6 +13,10 @@ namespace Library\Entities;
  *
  * @author jeang
  */
+/**
+ * Class photo
+ * @package Library\Entities
+ */
 class photo extends image
 {
 
@@ -27,20 +31,29 @@ class photo extends image
     const TITRE_INVALIDE = 3;
     const COMMENTAIRE_INVALIDE = 4;
     const PRIVEE_INVALIDE = 7;
-    
 
 
+    /**
+     * defini si l'objet est valide ou non
+     * @return bool
+     */
     public function isValid()
     {        
         return !(empty($this->auteur) || empty($this->titre) || empty($this->nom_photo) || empty($this->extension) || empty($this->privee));
     }
 
+    /**
+     * @param array $donnees
+     */
     public function __construct(array $donnees = array())
     {
         parent::__construct($donnees);
         $this->setExif($donnees);
     }
 
+    /**
+     * @param $auteur
+     */
     public function setAuteur($auteur)
     {
         if (!is_string($auteur) || empty($auteur)) {
@@ -49,7 +62,10 @@ class photo extends image
             $this->auteur = $auteur;
         }
     }
-    
+
+    /**
+     * @param $titre
+     */
     public function setTitre($titre)
     {
         if (!is_string($titre) || empty($titre)) {
@@ -59,6 +75,9 @@ class photo extends image
         }
     }
 
+    /**
+     * @param $commentaire
+     */
     public function setCommentaire($commentaire)
     {
         if (!is_string($commentaire) || empty($commentaire)) {
@@ -68,6 +87,9 @@ class photo extends image
         }
     }
 
+    /**
+     * @param $privee
+     */
     public function setPrivee($privee)
     {
         if (!is_string($privee) || empty($privee)) {
@@ -78,7 +100,10 @@ class photo extends image
             $this->erreurs[] = self::PRIVEE_INVALIDE;
         }
     }
-    
+
+    /**
+     * @param array $donnees
+     */
     public function setExif(array $donnees = array())
     {
         $this->exif= new exif($donnees);
@@ -88,31 +113,41 @@ class photo extends image
     //getter//
 
 
+    /**
+     * @return mixed
+     */
     public function getAuteur()
     {
         return $this->auteur;
     }
 
-    public function getPhotographe()
-    {
-        return $this->photographe;
-    }
-
+    /**
+     * @return mixed
+     */
     public function getTitre()
     {
         return $this->titre;
     }
 
+    /**
+     * @return mixed
+     */
     public function getCommentaire()
     {
         return $this->commentaire;
     }
-    
+
+    /**
+     * @return mixed
+     */
     public function getPrivee()
     {
         return $this->privee;
     }
-    
+
+    /**
+     * @return mixed
+     */
     public function getExif()
     {
         return $this->exif;
