@@ -10,7 +10,7 @@ namespace Library;
 
 /**
  * Description of Page
- * gestion des managers
+ *
  * @author jeang
  */
 class Page extends ApplicationComponent
@@ -19,24 +19,16 @@ class Page extends ApplicationComponent
     protected $contentFile;
     protected $vars = array();
 
-    /**
-     * ajoute les variables de la route a la pages
-     * @param $var
-     * @param $value
-     */
     public function addVars($var, $value)
     {
         if (!is_string($var) || is_numeric($var) || empty($var))
         {
             throw new \InvalidArgumentException('mauvais nom de variable');
         }
+
         $this->vars[$var] = $value;
     }
 
-    /**
-     *  génere la page avec le layout + le contenu
-     * @return string
-     */
     public function getGeneratedPage()
     {
         if (!file_exists($this->contentFile))
@@ -45,6 +37,7 @@ class Page extends ApplicationComponent
         }
         header('content-type: text/html; charset=utf-8');
         $user = $this->app->user();
+
         extract($this->vars);
 
         ob_start();
@@ -62,10 +55,6 @@ class Page extends ApplicationComponent
         return ob_get_clean();
     }
 
-    /**
-     * creer le contenu de la page
-     * @param $contentFile
-     */
     public function setContentFile($contentFile)
     {
         if (!is_string($contentFile) || empty($contentFile))

@@ -10,7 +10,7 @@ namespace Library;
 
 /**
  * Description of PDOFactory
- * defni la base de donner ou  on se connecte avec PDO
+ *
  * @author jeang
  */
 class PDOFactory
