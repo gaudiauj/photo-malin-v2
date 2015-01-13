@@ -60,7 +60,6 @@ class PhotoController extends \Library\BackController
         $this->page->addVars('title', 'photos public');
         $this->page->addVars('noLayout', true);
         $nombrePhoto=$this->app->config()->get('nombrePhoto');
-        $photos = $this->managers->getManagerOf('photo')->searchpublic();
         if ($request->postExists('plus_photo'))
         {
             $plus_photo=$request->postData('plus_photo');

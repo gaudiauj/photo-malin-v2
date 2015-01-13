@@ -6,4 +6,5 @@
     <define var="taille_photo" value="2000000"/>
     <define var="chemin_miniature" value="./img/img_utilisateur/miniature/"/>
     <define var="chemin_photo" value="./img/img_utilisateur/taille_normal/"/>
+    <define var="nombrePhoto" value="24"/>
 </definitions>

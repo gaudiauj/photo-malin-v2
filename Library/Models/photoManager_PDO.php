@@ -67,7 +67,6 @@ class photoManager_PDO extends photoManager
             $array['iso']= (int) $array['iso'];
             $photos[] = new \Library\Entities\photo($array);
         }
-        
         foreach ($photos as $photo) {
             $photo->getExif()->setDate_prise_photo(new \DateTime($photo->getExif()->getDate_prise_photo()));
         }

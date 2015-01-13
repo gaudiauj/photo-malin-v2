@@ -14,10 +14,53 @@
         </p>
     </div>
     <div id="aff_photo">
-        <?php
-  var_dump($photos);
-        ?>
     </div>
 </div>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-<script src="./scripts/phototest.js"></script>
+<script>
+    $(function () {
+        var i = true;
+        //ajax
+        var plusphoto = 1;
+        var $window = $(window);
+        /*
+        $window.scroll(function () {
+            if ($window.height() + $window.scrollTop() == $(document).height()) {
+                plusphoto++;
+                ajax(plusphoto);
+            }
+        });*/
+        if (i)
+        {
+            ajax(plusphoto);
+            i = false;
+            plusphoto = 1;
+        }
+
+    });
+    function ajax(plusphoto) {
+        $.post('photoPublic', {plus_photo: plusphoto}, function (data) {
+            $("#aff_photo").html(data);
+            var photos = jQuery.parseJSON(data);
+            var test = true;
+            var index = 0;
+            var i = 0;
+            while (i<1 || test)
+            {
+                try
+                {
+                    alert(photos[i].titre);
+                    var nom = "./img/img_utilisateur/taille_normal/"+photos[i].nom_photo+'.'+photos[i].extension;
+                    alert (nom);
+                    $("#aff_photo").prepend($('<img>',{id:'theImg',src:nom}))
+                    i++;
+                }
+                catch (err)
+                {
+                    alert("stop");
+                    test = false;
+                }
+            }
+        });
+    }
+</script>

@@ -16,8 +16,8 @@ namespace Library\Entities;
 class image extends \Library\Entity
 {
 
-    protected $nom_photo;
-    protected $extension;
+    public $nom_photo;
+    public $extension;
     private static $extensions_valides = array('jpg', 'jpeg', 'png', 'JPG', 'JPEG', 'PNG');
 
     const NOM_PHOTO_INVALIDE = 2;
@@ -32,13 +32,24 @@ class image extends \Library\Entity
     public function __construct(array $donnees = array())
     {
         parent::__construct($donnees);
-        $this->setNom_photo();
+        if(!isset($donnees['nom_photo']))
+        {
+            $this->setNom_photo();}
+        
     }
 
     //setter //
-    public function setNom_photo()
+    public function setNom_photo($nom_photo=null)
     {
-        $this->nom_photo = md5(uniqid($this->getauteur(), true));
+        if ($nom_photo==null)
+        {
+            $this->nom_photo = md5(uniqid($this->getauteur(), true));
+        }
+        else
+        {
+            $this->nom_photo=$nom_photo;
+        }
+
     }
 
     public function setExtension($extension)
