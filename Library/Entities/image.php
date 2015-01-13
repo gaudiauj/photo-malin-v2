@@ -32,10 +32,10 @@ class image extends \Library\Entity
     public function __construct(array $donnees = array())
     {
         parent::__construct($donnees);
-        if(!isset($donnees['nom_photo']))
-        {
-            $this->setNom_photo();}
-        
+        if(!isset($donnees['nom_photo'])){
+            $this->setNom_photo();
+        }
+
     }
 
     //setter //

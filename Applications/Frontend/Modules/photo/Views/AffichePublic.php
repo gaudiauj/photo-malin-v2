@@ -42,10 +42,9 @@
         $.post('photoPublic', {plus_photo: plusphoto}, function (data) {
             $("#aff_photo").html(data);
             var photos = jQuery.parseJSON(data);
-            var test = true;
-            var index = 0;
             var i = 0;
-            while (i<1 || test)
+            taille=photos.length;
+            while (i<taille)
             {
                 try
                 {
@@ -58,7 +57,7 @@
                 catch (err)
                 {
                     alert("stop");
-                    test = false;
+                    break;
                 }
             }
         });
