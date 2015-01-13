@@ -14,10 +14,34 @@
         </p>
     </div>
     <div id="aff_photo">
-        <?php
-  var_dump($photos);
-        ?>
+
     </div>
 </div>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 <script src="./scripts/phototest.js"></script>
+<script>
+    $(function () {
+        var i = true;
+        //ajax
+        var plusphoto = 1;
+        var $window = $(window);
+        $window.scroll(function () {
+            if ($window.height() + $window.scrollTop() == $(document).height()) {
+                plusphoto++;
+                ajax(plusphoto);
+            }
+        });
+        if (i)
+        {
+            ajax(plusphoto);
+            i = false;
+            plusphoto = 1;
+        }
+    }
+    function ajax(plusphoto) {
+        $.post('photoPublic', {plus_photo: plusphoto}, function (data) {
+            $('#aff_photo').html(data);
+         });
+    }
+
+</script>

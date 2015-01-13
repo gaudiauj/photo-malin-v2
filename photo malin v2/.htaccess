@@ -1,4 +1,4 @@
-RewriteEngine On
+﻿RewriteEngine On
 
 
 RewriteRule ^web/admin/ web/backend.php [QSA,L]

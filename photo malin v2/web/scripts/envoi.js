@@ -89,7 +89,7 @@ function readURL(input) {
             var imagepreview = new Image();
             imagepreview.src = e.target.result;
             redim_image(imagepreview)
-        }
+        };
         reader2.readAsDataURL(input.files[0]);
     }
 }
@@ -137,7 +137,7 @@ $(document).ready(function (e)
         if ((myXhr[j].upload))
         {
             $.ajax({
-                url: "gestion/envoi_fichier.php",
+                url: "ajout",
                 type: "POST",
                 data: fichier[j],
                 contentType: false,
@@ -165,6 +165,7 @@ $(document).ready(function (e)
                 dataType: "html",
                 success: function (data)
                 {
+                    alert(data);
                     $(".percents" + j).html(data);
                     $('.progress' + j).hide();
                     j = j + 1;
@@ -179,9 +180,9 @@ $(document).ready(function (e)
                     $('#message').html("<p>transfert" + j + "reussi</p>");
                 },
                 error: function (data) {
-                    alert('error');
                     $(".percents" + j).html("erreur veuillez recharger la page");
                     $(".percents" + j).html(data);
+                    $("erreur").html(data);
                 }
             });
         }

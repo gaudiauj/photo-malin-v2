@@ -8,9 +8,10 @@ and open the template in the editor.
 
 <routes>
     <route url="/jeantest/web/commenter-([0-9]+)" module="News" action="insertComment" vars="news" />
-    <route url="/jeantest/web/index.php\?page=accueil" module="News" action="accueil" /> 
-    <route url="/jeantest/web/index.php" module="News" action="accueil" /> 
-    <route url="/jeantest/web/" module="News" action="accueil" /> 
+    <route url="/jeantest/web/index.php\?page=accueil" module="News" action="accueil" />
+    <route url="/jeantest/web/index.php" module="News" action="accueil" />
+    <route url="/jeantest/web/" module="News" action="accueil" />
+    <route url="/jeantest/" module="News" action="accueil" />
     <route url="/jeantest/web/news" module="News" action="news" /> 
     <route url="/jeantest/web/news-([0-9]+)" module="News" action="show" vars="id"/>
     <route url="/jeantest/web/inscription-back" module="Membre" action="inscription" /> 
