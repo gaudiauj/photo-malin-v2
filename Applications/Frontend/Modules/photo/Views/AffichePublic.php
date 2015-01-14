@@ -43,6 +43,7 @@
             $("#aff_photo").html(data);
             var photos = jQuery.parseJSON(data);
             var i = 0;
+
             taille=photos.length;
             while (i<taille)
             {
