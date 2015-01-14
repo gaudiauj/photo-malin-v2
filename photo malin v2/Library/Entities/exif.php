@@ -16,11 +16,11 @@ namespace Library\Entities;
 class exif extends \Library\Entity
 {
 
-    private $appareil_photo;
-    private $date_prise_photo;
-    private $iso;
-    private $vit_obt;
-    private $focale;
+    public $appareil_photo;
+    public $date_prise_photo;
+    public $iso;
+    public $vit_obt;
+    public $focale;
     
     
     const APPAREIL_PHOTO_INVALIDE = 8;

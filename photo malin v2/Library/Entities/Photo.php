@@ -16,11 +16,11 @@ namespace Library\Entities;
 class photo extends image
 {
 
-    private $auteur;    
-    private $titre;
-    private $commentaire;    
-    private $privee;
-    private $exif;
+    public $auteur;
+    public $titre;
+    public $commentaire;
+    public $privee;
+    public $exif;
     
 
     const AUTEUR_INVALIDE = 1;

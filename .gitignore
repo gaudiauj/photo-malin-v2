@@ -221,4 +221,5 @@ pip-log.txt
 *.png
 
 #phpstorm
-.idea\*
+.idea/*
+.idea/

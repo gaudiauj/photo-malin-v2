@@ -4,7 +4,7 @@
     <?php
     foreach ($listeMembres as $membres)
     {
-        echo '<tr><td>', $membres->getPseudo(), '</td><td>le ', $membres->getDateInscription()->format('d/m/Y à H\hi'), '</td><td>', $membres->getMail(), '</td><td></td></tr>', "\n";
+        echo '<tr><td>', '<a href="../profil-', $membres->getPseudo(), '">', $membres->getPseudo(), '</td><td>le ', $membres->getDateInscription()->format('d/m/Y à H\hi'), '</td><td>', $membres->getMail(), '</td><td><a href="membre-delete-', $membres->getPseudo(), '"><span class="glyphicon glyphicon-trash" aria-hidden="true"></a></td></tr>', "\n";
     }
     ?>
 </table>

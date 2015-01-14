@@ -58,7 +58,7 @@
                 i = 0;
             slider(i++);
         }, 18000);
-    })
+    });
 
     function slider(i)
     {

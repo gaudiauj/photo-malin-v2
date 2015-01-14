@@ -23,18 +23,24 @@ class membreController extends \Library\BackController
         $manager = $this->managers->getManagerOf('Membre');
         $page = $request->getData('page');
         $nombrePage = (int) ceil(($manager->count() / $nombreMembres));
-        if ($page > 0 && $page <= $nombrePage)
-        {
+        if ($page > 0 && $page <= $nombrePage) {
             $listeMembre = $manager->getList(($page - 1) * $nombreMembres, $page * $nombreMembres);
             $this->page->addVars('page', $page);
             $this->page->addVars('nombrepage', $nombrePage);
             $this->page->addVars('listeMembres', $listeMembre);
             $this->page->addVars('nombreMembres', $manager->count());
             $this->page->addVars('url', 'membre-list');
-        } else
-        {
+        } else {
             $this->app->httpResponse()->redirect404();
         }
+    }
+
+    public function executeDelete(\Library\HTTPRequest $request)
+    {
+        $manager = $this->managers->getManagerOf('Membre');
+        $manager->delete($request->getData('pseudo'));
+        $this->app->user()->setFlash('le membre a bien été supprimée !');
+        $this->app->httpResponse()->redirect($request->previousURL());
     }
 
 }

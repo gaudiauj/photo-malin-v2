@@ -20,23 +20,19 @@ abstract class CommentsManager extends \Library\Manager
 
     /**
      * Méthode permettant d'ajouter un commentaire
-     * @param $comment Le commentaire à ajouter
-     * @return void
+     * @param Comment|Le $comment Le commentaire à ajouter
      */
     abstract protected function add(Comment $comment);
 
     /**
      * Méthode permettant d'enregistrer un commentaire.
-     * @param $comment Le commentaire à enregistrer
-     * @return void
+     * @param Comment|Le $comment Le commentaire à enregistrer
      */
     public function save(Comment $comment)
     {
-        if ($comment->isValid())
-        {
+        if ($comment->isValid()) {
             $comment->isNew() ? $this->add($comment) : $this->update($comment);
-        } else
-        {
+        } else {
             throw new \RuntimeException('Le commentaire doit être validé pour être enregistré');
         }
     }
@@ -50,8 +46,7 @@ abstract class CommentsManager extends \Library\Manager
 
     /**
      * Méthode permettant de modifier un commentaire.
-     * @param $comment Le commentaire à modifier
-     * @return void
+     * @param Comment|Le $comment Le commentaire à modifier
      */
     abstract protected function update(Comment $comment);
 

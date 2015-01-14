@@ -1,12 +1,9 @@
-*
-{
-    margin: 0;
-}
+
 #slideshow img
 {
     display: none; 
     position: relative;
-    top:0px;
+    top:0;
 
 }
 .message
@@ -14,9 +11,9 @@
     width: 100%;
     margin: auto ;
     position:relative; 
-    top: 0px;
+    top: 0;
     border-radius: 5px;
-    box-shadow: 0px 4px 4px #1c1a19;
+    box-shadow: 0 4px 4px #1c1a19;
     background-color: black;
     opacity: 0.75;
 }
@@ -25,7 +22,6 @@
 .message p
 {
     color: red;
-    font-style: bold;
 }
 #uploadProgressBar 
 {
@@ -173,14 +169,14 @@ header
     width: 100%;
     margin: auto ;
     position:relative; 
-    top: 0px;
+    top: 0;
     border-radius: 5px;
-    box-shadow: 0px 4px 4px #1c1a19;
+    box-shadow: 0 4px 4px #1c1a19;
     background-color: black;
     opacity: 0.75;
     margin-left: auto ;
     margin-right: auto;
-    margin-top: 0px;
+    margin-top: 0;
 }
 .pass
 {
@@ -231,9 +227,9 @@ h1, h3,h2
     width: 100%;
     margin: auto ;
     position:relative; 
-    top: 0px;
+    top: 0;
     border-radius: 5px;
-    box-shadow: 0px 4px 4px #1c1a19;
+    box-shadow: 0 4px 4px #1c1a19;
     background-color: black;
     opacity: 0.75;
     margin-left: auto ;
@@ -333,12 +329,12 @@ input:focus {
 section a:visited,section a,#overlay a,#overlay a:visited
 {
     color: rgb(32, 145, 233);
-    border-bottom: 0px;
+    border-bottom: 0;
 }
 section a:hover,#overlay a:hover
 {
     color: red;
-    border-bottom: 0px;
+    border-bottom: 0;
 }
 progress{
     display: inline-block;
@@ -376,7 +372,7 @@ progress{
 a:visited
 {
     color: white;
-    border-bottom: 0px;
+    border-bottom: 0;
 }
 a:link 
 { 

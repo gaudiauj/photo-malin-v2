@@ -21,8 +21,7 @@ class MembreManager_PDO extends MembreManager
     public function add(Membre $membre)
     {
 
-        if (!$this->exist($membre))
-        {
+        if (!$this->exist($membre)) {
             $requete = $this->dao->prepare('INSERT INTO membre SET pseudo = :pseudo, mail = :mail, pass = :pass, dateInscription = NOW()');
             $requete->bindValue(':pseudo', $membre->getPseudo());
             $requete->bindValue(':mail', $membre->getMail());
@@ -30,8 +29,7 @@ class MembreManager_PDO extends MembreManager
 
             $requete->execute();
             return true;
-        } else
-        {
+        } else {
             return false;
         }
     }
@@ -45,11 +43,9 @@ class MembreManager_PDO extends MembreManager
 
         $requete->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, '\Library\Entities\Membre');
 
-        if ($membre = $requete->fetch())
-        {
+        if ($membre = $requete->fetch()) {
             return true;
-        } else
-        {
+        } else {
             return false;
         }
     }
@@ -63,11 +59,9 @@ class MembreManager_PDO extends MembreManager
 
         $requete->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, '\Library\Entities\Membre');
 
-        if ($membre = $requete->fetch())
-        {
+        if ($membre = $requete->fetch()) {
             return true;
-        } else
-        {
+        } else {
             return false;
         }
     }
@@ -84,8 +78,7 @@ class MembreManager_PDO extends MembreManager
     public function getList($debut = -1, $limite = -1)
     {
         $sql = 'SELECT pseudo,dateInscription,mail,id FROM membre ORDER BY id DESC';
-        if ($debut != -1 || $limite != -1)
-        {
+        if ($debut != -1 || $limite != -1) {
             $sql .= ' LIMIT ' . (int) $limite . ' OFFSET ' . (int) $debut;
         }
         $requete = $this->dao->query($sql);
@@ -106,6 +99,13 @@ class MembreManager_PDO extends MembreManager
     public function count()
     {
         return $this->dao->query('SELECT COUNT(*) FROM membre')->fetchColumn();
+    }
+
+    public function delete($pseudo)
+    {
+        $q = $this->dao->prepare('DELETE FROM membre WHERE pseudo = :pseudo ');
+        $q->bindValue(':pseudo', $pseudo);
+        $q->execute();
     }
 
 }

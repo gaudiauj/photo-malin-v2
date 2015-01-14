@@ -20,33 +20,31 @@ abstract class MembreManager extends \Library\Manager
 
     /**
      * Méthode permettant d'ajouter un membre retourne true si tout c'est bien passé false si le pseudo ou mail existe déja dans la bdd
-     * @param $membre Le membre à ajouter
-     * @return boolean
+     * @param Membre|Le $membre Le membre à ajouter
+     * @return bool
      */
     abstract protected function add(Membre $membre);
 
     public function save(News $news)
     {
-        if ($news->isValid())
-        {
+        if ($news->isValid()) {
             $news->isNew() ? $this->add($news) : $this->update($news);
-        } else
-        {
+        } else {
             throw new \RuntimeException('Le membre doit être valide pour être enregistrée');
         }
     }
 
     /**
      * Méthode permettant de savoir si un membre existe déja
-     * @param $membre le membte à verifier
-     * @return boolean
+     * @param Membre|le $membre le membte à verifier
+     * @return bool
      */
     abstract protected function exist(Membre $membre);
 
     /**
      * Méthode permettant de verifier si un membre existe avec son pseudo et pass.
-     * @param $membre le membte à verifier
-     * @return boolean
+     * @param Membre|le $membre le membte à verifier
+     * @return bool
      */
     abstract public function verifMembre(Membre $membre);
 
@@ -59,8 +57,8 @@ abstract class MembreManager extends \Library\Manager
 
     /**
      * Méthode permettant de recuperer le pseudo d'un membre
-     * @param $id id du membre
      * @return Strings
+     * @internal param id $id du membre
      */
     abstract public function getList();
 
@@ -69,4 +67,12 @@ abstract class MembreManager extends \Library\Manager
      * @return int nombre de membre.
      */
     abstract public function count();
+
+    /**
+     * Méthode permettant de supprimer un membre.
+     * @param $pseudo
+     * @return
+     * @internal param L $id 'identifiant du commentaire à supprimer
+     */
+    abstract public function delete($pseudo);
 }

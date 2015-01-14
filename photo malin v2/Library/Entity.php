@@ -62,6 +62,8 @@ abstract class Entity implements \ArrayAccess
     {
         if (isset($this->$var) && is_callable(array($this, $var))) {
             return $this->$var();
+        } else {
+            return null;
         }
     }
 

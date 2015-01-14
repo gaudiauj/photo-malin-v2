@@ -98,21 +98,20 @@ class PhotoClass
 
     /**
      * Créer un fichier JPEG / PNG depuis l'image fournie
-     * 
-     * @param $image Une ressource d'image, retournée par 
+     *
+     * @param $image Une ressource d'image, retournée par
      * une des fonctions de création d'images
-     * 
-     * @param $destination Le chemin d'enregistrement du fichier. 
-     * S'il n'est pas défini ou vaut NULL, le flux d'image brute 
+     *
+     * @param $destination Le chemin d'enregistrement du fichier.
+     * S'il n'est pas défini ou vaut NULL, le flux d'image brute
      * sera affiché directement.
-     * 
-     * @param $quality Quality est optionnel, et prend des valeurs
-     * entières de 0 (pire qualité, petit fichier) et 
-     * 100 (meilleure qualité, gros fichier). 
+     *
+     * @param Quality|int $quality Quality est optionnel, et prend des valeurs
+     * entières de 0 (pire qualité, petit fichier) et
+     * 100 (meilleure qualité, gros fichier).
      * Par défaut, la valeur est 50
-     * 
      * @return null
-     * */
+     */
     function creerImage($image, $destination, $quality = 50)
     {
         $imageCreate = array(
@@ -138,17 +137,16 @@ class PhotoClass
 
     /**
      * Redimensionne une image
-     * 
-     * @param $destination Chemin de destination de l'image 
+     *
+     * @param $destination Chemin de destination de l'image
      * redimensionnée
-     * 
+     *
      * @param $width Width de l'image redimensionnée (largeur)
-     * 
+     *
      * @param $height Height de l'image redimensionnée (hauteur)
-     * 
-     * @param $quality Quality de l'image redimensionnée (compression) 
-     * si jpeg
      * @return null
+     * @internal param Quality $quality de l'image redimensionnée (compression)
+     * si jpeg
      */
     function redimensionneImage($destination, $width, $height)
     {
@@ -175,7 +173,8 @@ class PhotoClass
 
     /**
      * enregistre une photo sur le serveur ainsi qu'une miniature
-     * 
+     *
+     * @param $chemin_miniature
      * @return null
      */
     public function enregistrePhoto($chemin_miniature)
@@ -184,10 +183,12 @@ class PhotoClass
         $nom_miniature = $chemin_miniature . $this->photo->getNom_photo() . '.' . $extension;
         $resultat = move_uploaded_file($this->files['fichier']['tmp_name'], $this->source);
         $this->redimensionneImage($nom_miniature, 250, -1);
-    }   
-     /**
+    }
+
+    /**
      * execute exif et enregistrePhoto
-     * 
+     *
+     * @param $chemin_miniature
      * @return null
      */
     public function ajoutphoto($chemin_miniature)

@@ -22,11 +22,12 @@ abstract class photoManager extends \Library\Manager
      * @return void
      */
     abstract protected function add(Photo $photo);
-    
+
     /**
      * Méthode permettant de supprimer une photo.
-     * @param $id int L'identifiant de la photo à supprimer
-     * @return void
+     * @param Photo $photo
+     * @return
+     * @internal param int $id L'identifiant de la photo à supprimer
      */
     abstract public function delete(Photo $photo);
     

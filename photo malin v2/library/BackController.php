@@ -29,8 +29,7 @@ class BackController extends ApplicationComponent
     public function execute()
     {
         $methode = 'execute' . ucfirst($this->action);
-        if (!is_callable(array($this, $methode)))
-        {
+        if (!is_callable(array($this, $methode))) {
             throw new \RuntimeException('L\'action' . $this->action . 'n\existe pas');
         }
         $this->$methode($this->app->httpRequest());
@@ -43,8 +42,7 @@ class BackController extends ApplicationComponent
 
     public function setModule($module)
     {
-        if (!is_string($module) || empty($module))
-        {
+        if (!is_string($module) || empty($module)) {
             throw new \InvalidArgumentException('Le module doit être une chaine de caractères valide');
         }
 
@@ -53,8 +51,7 @@ class BackController extends ApplicationComponent
 
     public function setAction($action)
     {
-        if (!is_string($action) || empty($action))
-        {
+        if (!is_string($action) || empty($action)) {
             throw new \InvalidArgumentException('L\'action doit être une chaine de caractères valide');
         }
 
@@ -63,8 +60,7 @@ class BackController extends ApplicationComponent
 
     public function setView($view)
     {
-        if (!is_string($view) || empty($view))
-        {
+        if (!is_string($view) || empty($view)) {
             throw new \InvalidArgumentException('La vue doit être une chaine de caractères valide');
         }
 

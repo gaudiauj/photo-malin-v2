@@ -20,41 +20,28 @@ class Router
 
     const NO_ROUTE = 1;
 
-
-    /**
-     * ajoute une route
-     * @param Route $route
-     */
+    //ajoute une route 
     public function addRoute(Route $route)
     {
-        if (!in_array($route, $this->routes))
-        {
+        if (!in_array($route, $this->routes)) {
             $this->routes[] = $route;
         }
     }
 
-
-    /**
-     * recupere toutes les routes
-     * @param $url
-     * @return mixed
-     */
+    // recupere toutes les routes 
     public function getRoute($url)
     {
         foreach ($this->routes as $route)
         {
             $varsValues = $route->match($url);
-            if ($varsValues !== false)
-            {
-                if ($route->hasVars())
-                {
+            if ($varsValues !== false) {
+                if ($route->hasVars()) {
                     $varsnames = $route->varsNames();
                     $listVars = array();
                     foreach ($varsValues as $key => $match)
                     {
                         // La première valeur contient entièrement la chaine capturée (voir la doc sur preg_match).
-                        if ($key !== 0)
-                        {
+                        if ($key !== 0) {
                             $listVars[$varsnames[$key - 1]] = $match;
                         }
                     }
