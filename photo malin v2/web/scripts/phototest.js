@@ -45,7 +45,7 @@ $(function () {
         $('#tri').hide();
         $('html').css('overflow', 'hidden');
         var chemin = $(this).attr('src');
-        $(this).addClass('active');
+        $(this).parent().addClass('active');
         var texte = '<div id="chargement"><p>chargement .... <img src="img/loading.gif"/></p></div><img id="img_aff" src=""/><div id="donnee"></div>';
 
         //quand on click quitte l'affichage de l'image 
@@ -76,7 +76,21 @@ $(function () {
 
     function image_suivante_gauche()
     {
-        chemin = $('.active').prev().attr('src');
+        chemin = $('.active').prev().find('img').attr('src');
+        if (chemin === undefined)
+        {
+            chemin = $('.active').removeClass('active').parent().prev().find(':last-child').addClass('active').find('img').attr('src');
+            // si chemin est defini sinon on retourne au debut
+            if (chemin === undefined)
+            {
+                $('.active').removeClass('active');
+                chemin = $('#boss').find(':last-child').find(':last-child').addClass('active').find('img').attr('src');
+            }
+        }
+        else
+        {
+            $('.active').removeClass('active').prev().addClass('active');
+        }
         affichage_photo(chemin);
     }
 
