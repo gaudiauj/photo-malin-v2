@@ -142,3 +142,8 @@ a:focus {
 {
     color: white;
 }
+#aff_photo img
+{
+    margin: 5px;
+    height: 200px;
+}
